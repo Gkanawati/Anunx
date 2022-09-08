@@ -12,10 +12,10 @@ export const LightTheme = createTheme({
       white: '#fff',
     },
     secondary: {
-      main: '#015F43',
-      dark: '#00875F',
-      light: '#00B37E',
-      contrastText: "#fff",
+      main: "#fff",
+      greenDark: '#015F43',
+      greenMd: '#00875F',
+      greenLight: '#00B37E',
     },
     blue: {
       main: '#81D8F7',

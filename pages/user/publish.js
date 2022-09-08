@@ -9,14 +9,43 @@ import {
   FormControl,
   Select,
   Button,
+  IconButton,
 } from '@mui/material';
-import TemplateDefault from '../../src/templates/Default';
+import { DeleteForever } from '@mui/icons-material';
 
-import { LightTheme } from '../../src/themes/Light';
+import {
+  CardSendImage,
+  MainImage,
+  Mask,
+  Thumb,
+  ThumbsContainer
+} from './publish.styles';
+import TemplateDefault from '../../src/templates/Default';
+import { LightTheme as theme } from '../../src/themes/Light';
+import { useDropzone } from 'react-dropzone';
 
 const Publish = () => {
 
   const [category, setCategory] = useState('');
+  const [files, setFiles] = useState([])
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFile) => {
+      const newFiles = acceptedFile.map(file => {
+        return Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      })
+
+      setFiles([
+        ...files,
+        ...newFiles
+      ])
+      console.log(files)
+    }
+
+  })
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -34,7 +63,7 @@ const Publish = () => {
       </Container>
 
       <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={LightTheme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
+        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
           <Box sx={{ paddingBottom: 3 }}>
             <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
               Título do Anúncio
@@ -68,20 +97,51 @@ const Publish = () => {
       </Container>
 
       <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={LightTheme.palette.background.default} sx={{ paddingX: 3 }}>
+        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
           <Box sx={{ paddingY: 3 }}>
             <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
               Imagens
             </Typography>
-            <Typography component='div' variant='body2' color='textPrimary'>
+            <Typography component='div' variant='body2' color='textPrimary' gutterBottom>
               A primeira imagem é a foto principal do seu anúncio
             </Typography>
+
+            <ThumbsContainer>
+              <CardSendImage {...getRootProps()}>
+                <input {...getInputProps()} />
+                <Typography variant='body2' color='textPrimary'>
+                  Clique para adicionar ou arraste a imagem aqui.
+                </Typography>
+              </CardSendImage>
+
+              {files.map((file, index) => (
+                <Thumb
+                  key={file.name}
+                  style={{ backgroundImage: `url(${file.preview})` }}
+                >
+                  {index === 0 ?
+                    <MainImage>
+                      <Typography variant='body' color='secondary'>
+                        Principal
+                      </Typography>
+                    </MainImage>
+                    : null
+                  }
+                  <Mask>
+                    <IconButton color='secondary'>
+                      <DeleteForever />
+                    </IconButton>
+                  </Mask>
+                </Thumb>
+              ))}
+
+            </ThumbsContainer>
           </Box>
         </Box>
       </Container>
 
       <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={LightTheme.palette.background.default} sx={{ paddingX: 3 }}>
+        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
           <Box sx={{ paddingY: 3 }}>
             <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
               Descrição
@@ -100,7 +160,7 @@ const Publish = () => {
       </Container>
 
       <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={LightTheme.palette.background.default} sx={{ paddingX: 3 }}>
+        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
           <Box sx={{ paddingY: 3 }}>
             <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
               Dados de Contato
@@ -146,5 +206,7 @@ const Publish = () => {
     </TemplateDefault>
   )
 }
+
+
 
 export default Publish
