@@ -27,7 +27,7 @@ import { useDropzone } from 'react-dropzone';
 const Publish = () => {
 
   const [category, setCategory] = useState('');
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -44,8 +44,12 @@ const Publish = () => {
       ])
       console.log(files)
     }
-
   })
+
+  const handleRemoveFile = (fileName) => {
+    const newFiles = files.filter(item => item.name !== fileName)
+    setFiles(newFiles)
+  }
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -119,16 +123,15 @@ const Publish = () => {
                   key={file.name}
                   style={{ backgroundImage: `url(${file.preview})` }}
                 >
-                  {index === 0 ?
+                  {index === 0 &&
                     <MainImage>
                       <Typography variant='body' color='secondary'>
                         Principal
                       </Typography>
                     </MainImage>
-                    : null
                   }
-                  <Mask>
-                    <IconButton color='secondary'>
+                  <Mask className='mask'>
+                    <IconButton color='secondary' onClick={() => handleRemoveFile(file.name)}>
                       <DeleteForever />
                     </IconButton>
                   </Mask>
@@ -206,7 +209,6 @@ const Publish = () => {
     </TemplateDefault>
   )
 }
-
 
 
 export default Publish

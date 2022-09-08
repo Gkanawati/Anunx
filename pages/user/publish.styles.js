@@ -28,8 +28,7 @@ export const Thumb = styled('Box')({
   position: 'relative',
 
   "&:hover": {
-    // Mask
-    ".mui-style-1p8fxnf": {
+    ".mask": {
       display: "flex",
     },
   }
