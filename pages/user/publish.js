@@ -10,6 +10,8 @@ import {
   Select,
   Button,
   IconButton,
+  OutlinedInput,
+  InputAdornment,
 } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
 
@@ -83,10 +85,10 @@ const Publish = () => {
               Categoria
             </Typography>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+              <InputLabel id="select-category">Categoria</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="select-category"
+                id="select-category"
                 value={category}
                 label="Categoria"
                 onChange={handleChange}
@@ -158,6 +160,26 @@ const Publish = () => {
               variant='outlined'
               fullWidth
             />
+          </Box>
+        </Box>
+      </Container>
+
+      <Container sx={{ paddingBottom: 3 }}>
+        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+          <Box sx={{ paddingY: 3 }}>
+            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+              Preço
+            </Typography>
+            <FormControl fullWidth variant='outlined'>
+              <InputLabel labelId="input-price">Valor</InputLabel>
+              <OutlinedInput
+                labelId="input-price"
+                id="input-price"
+                label="Valor"
+                onChange={() => { }}
+                startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
+              />
+            </FormControl>
           </Box>
         </Box>
       </Container>
