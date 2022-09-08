@@ -21,8 +21,8 @@ export default function Home() {
         <Button variant='contained' className='buttonAdd' color='primary' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
           Publicar novo anúncio
         </Button>
-        <Container maxWidth='md'>
-          <Grid container spacing={3}>
+        <Container maxWidth='lg'>
+          <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
               <Card>
                 <CardMedia
