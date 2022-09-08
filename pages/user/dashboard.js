@@ -14,14 +14,14 @@ import TemplateDefault from '../../src/templates/Default'
 export default function Home() {
   return (
     <TemplateDefault>
-      <Container sx={{ paddingTop: 8, paddingBottom: 6 }}>
+      <Container maxWidth='lg' sx={{ paddingTop: 8, paddingBottom: 6 }}>
         <Typography component='h1' variant='h2' align='center'>
           Meus Anúncios
         </Typography>
         <Button variant='contained' className='buttonAdd' color='primary' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
           Publicar novo anúncio
         </Button>
-        <Container maxWidth='lg'>
+        <Container >
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
               <Card>
