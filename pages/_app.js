@@ -16,6 +16,7 @@ export default function MyApp(props) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>Anunx</title>
       </Head>
       <ThemeProvider theme={LightTheme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
