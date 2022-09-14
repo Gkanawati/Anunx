@@ -1,34 +1,73 @@
+import { useState } from 'react';
 import {
   AppBar,
-  Box,
   Typography,
   Button,
   Toolbar,
+  Container,
   IconButton,
+  Avatar,
+  Menu,
+  MenuItem,
+  Divider,
 } from '@mui/material'
 
-import MenuIcon from '@mui/icons-material/Menu';
+import Link from 'next/link';
+import { AccountCircle } from '@mui/icons-material';
 
 export default function Header() {
+
+  const [anchorUserMenu, setAnchorUserMenu] = useState(false);
+
+  const openUserMenu = Boolean(anchorUserMenu)
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <AppBar position="static" elevation={3}>
+      <Container maxWidth='lg'>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+          <Link href="/">
+            <a style={{ flexGrow: 1, textDecoration: 'none', color: '#fff' }}>
+              <Typography variant="h6" component="div" >
+                Anunx
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/user/publish" passHref>
+            <Button color="inherit" variant="outlined">
+              Anunciar e Vender
+            </Button>
+          </Link>
+          <IconButton color='secondary' onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
+            {
+              true === false
+                ? <Avatar src="" />
+                : <AccountCircle />
+            }
+            <Typography variant='subtitle2' color='secondary' sx={{ paddingLeft: '6px' }}>
+              Gabriel Kanawati
+            </Typography>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Anunx
-          </Typography>
-          <Button color="inherit">Login</Button>
+
+          <Menu
+            anchorEl={anchorUserMenu}
+            open={openUserMenu}
+            onClose={() => setAnchorUserMenu(null)}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}
+          >
+            <Link href="/user/dashboard">
+              <MenuItem>Meus Anúncios</MenuItem>
+            </Link>
+            <Link href="/user/publish">
+              <MenuItem>Publicar novo anúncio</MenuItem>
+            </Link>
+            <Divider />
+            <MenuItem>Sair</MenuItem>
+          </Menu>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar >
   );
 }

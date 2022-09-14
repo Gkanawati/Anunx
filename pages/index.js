@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <TemplateDefault>
       <Container sx={{ height: '100vh' }}>
-        <Container maxWidth='md' sx={styles.container}>
+        <Container maxWidth='lg' sx={styles.container}>
           <Typography component='h1' variant='h3' align='center' color='textPrimary'>
             O que deseja encontrar?
           </Typography>
@@ -30,17 +30,17 @@ const Home = () => {
             </IconButton>
           </Paper>
         </Container>
-        <Container maxWidth='md' sx={styles.cardGrid}>
+        <Container maxWidth='lg' sx={styles.cardGrid}>
           <Typography component='h1' variant='h4' align='center' color='textPrimary' sx={{ paddingBottom: 2 }}>
             Destaques
           </Typography>
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
-              <Card>
+              <Card sx={{ backgroundColor: '#fff' }}>
                 <CardMedia
                   image={'https://source.unsplash.com/random'}
                   title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
+                  sx={{ paddingTop: '56%' }}
                 />
                 <CardContent>
                   <Typography variant='h5' component='h2'>
@@ -53,11 +53,11 @@ const Home = () => {
               </Card>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Card>
+              <Card sx={{ backgroundColor: '#fff' }}>
                 <CardMedia
                   image={'https://source.unsplash.com/random'}
                   title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
+                  sx={{ paddingTop: '56%' }}
                 />
                 <CardContent>
                   <Typography variant='h5' component='h2'>
@@ -70,11 +70,11 @@ const Home = () => {
               </Card>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Card>
+              <Card sx={{ backgroundColor: '#fff' }}>
                 <CardMedia
                   image={'https://source.unsplash.com/random'}
                   title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
+                  sx={{ paddingTop: '56%' }}
                 />
                 <CardContent>
                   <Typography variant='h5' component='h2'>
