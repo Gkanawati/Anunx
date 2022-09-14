@@ -15,7 +15,7 @@ import TemplateDefault from '../src/templates/Default';
 const Home = () => {
   return (
     <TemplateDefault>
-      <Container sx={{ height: '100vh' }}>
+      <Container>
         <Container maxWidth='lg' sx={styles.container}>
           <Typography component='h1' variant='h3' align='center' color='textPrimary'>
             O que deseja encontrar?
@@ -86,6 +86,23 @@ const Home = () => {
                 </CardContent>
               </Card>
             </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card sx={{ backgroundColor: '#fff' }}>
+                <CardMedia
+                  image={'https://source.unsplash.com/random'}
+                  title="Titulo do Anuncio"
+                  sx={{ paddingTop: '56%' }}
+                />
+                <CardContent>
+                  <Typography variant='h5' component='h2'>
+                    Produto Exemplo
+                  </Typography>
+                  <Typography>
+                    R$ 60,00
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
         </Container>
       </Container>
@@ -97,7 +114,7 @@ const styles = {
   container: {
     paddingTop: 8,
     paddingBottom: 6,
-    paddingX: 10,
+    paddingX: 3,
   },
   searchBox: {
     paddingX: 2,

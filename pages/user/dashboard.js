@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <TemplateDefault>
       <Container maxWidth='lg' sx={{ paddingTop: 8, paddingBottom: 6 }}>
-        <Typography component='h1' variant='h2' align='center'>
+        <Typography component='h1' variant='h2' align='center' color='primary'>
           Meus Anúncios
         </Typography>
         <Button variant='contained' className='buttonAdd' color='primary' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
