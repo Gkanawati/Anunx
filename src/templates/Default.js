@@ -7,7 +7,9 @@ const Default = ({ children }) => {
   return (
     <Box bgcolor={LightTheme.palette.background.paper} >
       <Header />
-      {children}
+      <Box sx={{ paddingTop: 8, paddingBottom: 8 }}>
+        {children}
+      </Box>
       <Footer />
     </Box>
   )

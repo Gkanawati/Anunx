@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <TemplateDefault>
       <Container>
-        <Container maxWidth='lg' sx={styles.container}>
+        <Container maxWidth='lg'>
           <Typography component='h1' variant='h3' align='center' color='textPrimary'>
             O que deseja encontrar?
           </Typography>
@@ -111,10 +111,8 @@ const Home = () => {
 }
 
 const styles = {
-  container: {
-    paddingTop: 8,
-    paddingBottom: 6,
-    paddingX: 3,
+  cardGrid: {
+    paddingTop: 6,
   },
   searchBox: {
     paddingX: 2,

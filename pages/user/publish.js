@@ -59,7 +59,7 @@ const Publish = () => {
 
   return (
     <TemplateDefault>
-      <Container maxWidth='lg' sx={{ paddingTop: 8, paddingBottom: 6 }}>
+      <Container maxWidth='lg' >
         <Typography component='h1' variant='h2' align='center' color='textPrimary'>
           Publicar Anúncio
         </Typography>

@@ -24,7 +24,6 @@ const Footer = () => {
         paddingBottom: LightTheme.spacing(3)
       }, {
         borderTop: `1px solid ${LightTheme.palette.divider}`,
-        marginTop: LightTheme.spacing(8),
       }]}
     >
       <Grid container spacing={3}>
