@@ -1,16 +1,15 @@
 import {
-  Card,
-  CardContent,
-  CardMedia,
   Container,
   Grid,
   IconButton,
   InputBase,
   Paper,
-  Typography
+  Typography,
+  Button
 } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import TemplateDefault from '../src/templates/Default';
+import Card from '../src/components/Card';
 
 const Home = () => {
   return (
@@ -36,72 +35,32 @@ const Home = () => {
           </Typography>
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ backgroundColor: '#fff' }}>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%' }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Card
+                image={'https://source.unsplash.com/random'}
+                title='Produto X'
+                subtitle='R$ 60,00'
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ backgroundColor: '#fff' }}>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%' }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Card
+                image={'https://source.unsplash.com/random'}
+                title='Produto X'
+                subtitle='R$ 60,00'
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ backgroundColor: '#fff' }}>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%' }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Card
+                image={'https://source.unsplash.com/random'}
+                title='Produto X'
+                subtitle='R$ 60,00'
+              />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Card sx={{ backgroundColor: '#fff' }}>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%' }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Card
+                image={'https://source.unsplash.com/random'}
+                title='Produto X'
+                subtitle='R$ 60,00'
+              />
             </Grid>
           </Grid>
         </Container>

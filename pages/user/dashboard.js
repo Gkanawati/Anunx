@@ -1,13 +1,10 @@
 import {
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
   Container,
   Grid,
   Typography
 } from '@mui/material'
+import Card from '../../src/components/Card'
 
 import TemplateDefault from '../../src/templates/Default'
 
@@ -24,129 +21,21 @@ export default function Home() {
         <Container >
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
-              <Card>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card>
-                <CardMedia
-                  image={'https://source.unsplash.com/random'}
-                  title="Titulo do Anuncio"
-                  sx={{ paddingTop: '56%', }}
-                />
-                <CardContent>
-                  <Typography variant='h5' component='h2'>
-                    Produto Exemplo
-                  </Typography>
-                  <Typography>
-                    R$ 60,00
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                  <Button size="small" color="primary">
-                    Editar
-                  </Button>
-                </CardActions>
-              </Card>
+              <Card
+                image={'https://source.unsplash.com/random'}
+                title='Produto X'
+                subtitle='R$ 60,00'
+                actions={
+                  <>
+                    <Button size="small" color="primary">
+                      Editar
+                    </Button>
+                    <Button size="small" color="primary">
+                      Editar
+                    </Button>
+                  </>
+                }
+              />
             </Grid>
           </Grid>
         </Container>
