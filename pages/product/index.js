@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel'
 
-import { LightTheme } from '../src/themes/Light';
-import TemplateDefault from '../src/templates/Default';
+import { LightTheme } from '../../src/themes/Light';
+import TemplateDefault from '../../src/templates/Default';
 
 const Product = () => {
 

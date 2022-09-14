@@ -10,7 +10,7 @@ import { LightTheme } from '../themes/Light';
 
 const Card = ({ image, title, subtitle, actions }) => {
   return (
-    <CardMUI sx={{ backgroundColor: LightTheme.palette.background }}>
+    <CardMUI sx={{ backgroundColor: LightTheme.palette.background.default }}>
       <CardMedia
         image={image}
         title="Titulo do Anuncio"

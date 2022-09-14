@@ -5,7 +5,7 @@ import { LightTheme } from "../themes/Light"
 
 const Default = ({ children }) => {
   return (
-    <Box bgcolor={LightTheme.palette.background.paper} >
+    <Box bgcolor={LightTheme.palette.background} >
       <Header />
       <Box sx={{ paddingTop: 8, paddingBottom: 8 }}>
         {children}
