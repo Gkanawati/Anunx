@@ -17,11 +17,11 @@ const Footer = () => {
       maxWidth='lg'
       component='footer'
       sx={[smUp ? {
-        paddingTop: LightTheme.spacing(4),
-        paddingBottom: LightTheme.spacing(4)
+        paddingTop: 4,
+        paddingBottom: 4
       } : {
-        paddingTop: LightTheme.spacing(3),
-        paddingBottom: LightTheme.spacing(3)
+        paddingTop: 3,
+        paddingBottom: 3
       }, {
         borderTop: `1px solid ${LightTheme.palette.divider}`,
       }]}
