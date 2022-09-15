@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import {
   TextField,
   Typography,
@@ -25,6 +27,11 @@ import {
 import TemplateDefault from '../../src/templates/Default';
 import { LightTheme as theme } from '../../src/themes/Light';
 import { useDropzone } from 'react-dropzone';
+
+const validationSchema = yup.object().shape({
+  title: yup.string().min(5).max(100).required(),
+
+})
 
 const Publish = () => {
 
@@ -59,7 +66,7 @@ const Publish = () => {
 
   return (
     <TemplateDefault>
-      <Container maxWidth='lg' >
+      <Container maxWidth='lg' sx={{ marginBottom: 3 }}>
         <Typography component='h1' variant='h2' align='center' color='textPrimary'>
           Publicar Anúncio
         </Typography>
@@ -68,166 +75,193 @@ const Publish = () => {
         </Typography>
       </Container>
 
-      <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
-          <Box sx={{ paddingBottom: 3 }}>
-            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-              Título do Anúncio
-            </Typography>
-            <TextField
-              label="ex: Xbox One Series S"
-              size='small'
-              fullWidth
-            />
-          </Box>
-          <Box sx={{ minWidth: 120, paddingBottom: 3 }}>
-            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-              Categoria
-            </Typography>
-            <FormControl fullWidth>
-              <InputLabel id="select-category">Categoria</InputLabel>
-              <Select
-                labelId="select-category"
-                id="select-category"
-                value={category}
-                label="Categoria"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Computadores</MenuItem>
-                <MenuItem value={20}>Automotivos</MenuItem>
-                <MenuItem value={30}>Estética</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </Box>
-      </Container>
+      <Formik
+        initialValues={{
+          title: '',
 
-      <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
-          <Box sx={{ paddingY: 3 }}>
-            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-              Imagens
-            </Typography>
-            <Typography component='div' variant='body2' color='textPrimary' gutterBottom>
-              A primeira imagem é a foto principal do seu anúncio
-            </Typography>
+        }}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          console.log('Enviou o form', values)
+        }}
+      >
+        {({
+          values,
+          errors,
+          handleChange,
+          handleSubmit,
+        }) => {
+          console.log(errors)
+          return (
+            <form onSubmit={handleSubmit}>
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
+                  <Box sx={{ paddingBottom: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Título do Anúncio
+                    </Typography>
+                    <TextField
+                      name='title'
+                      value={values.title}
+                      onChange={handleChange}
+                      label="Ex: Xbox One Series S"
+                      size='small'
+                      error={errors.title}
+                      helperText={errors.title}
+                      fullWidth
+                    />
+                  </Box>
+                  <Box sx={{ minWidth: 120, paddingBottom: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Categoria
+                    </Typography>
+                    <FormControl fullWidth>
+                      <InputLabel id="select-category">Categoria</InputLabel>
+                      <Select
+                        labelId="select-category"
+                        id="select-category"
+                        value={category}
+                        label="Categoria"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={10}>Computadores</MenuItem>
+                        <MenuItem value={20}>Automotivos</MenuItem>
+                        <MenuItem value={30}>Estética</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Container>
 
-            <ThumbsContainer>
-              <CardSendImage {...getRootProps()}>
-                <input {...getInputProps()} />
-                <Typography variant='body2' color='textPrimary'>
-                  Clique para adicionar ou arraste a imagem aqui.
-                </Typography>
-              </CardSendImage>
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                  <Box sx={{ paddingY: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Imagens
+                    </Typography>
+                    <Typography component='div' variant='body2' color='textPrimary' gutterBottom>
+                      A primeira imagem é a foto principal do seu anúncio
+                    </Typography>
 
-              {files.map((file, index) => (
-                <Thumb
-                  key={file.name}
-                  style={{ backgroundImage: `url(${file.preview})` }}
-                >
-                  {index === 0 &&
-                    <MainImage>
-                      <Typography variant='body' color='secondary'>
-                        Principal
-                      </Typography>
-                    </MainImage>
-                  }
-                  <Mask className='mask'>
-                    <IconButton color='secondary' onClick={() => handleRemoveFile(file.name)}>
-                      <DeleteForever />
-                    </IconButton>
-                  </Mask>
-                </Thumb>
-              ))}
+                    <ThumbsContainer>
+                      <CardSendImage {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <Typography variant='body2' color='textPrimary'>
+                          Clique para adicionar ou arraste a imagem aqui.
+                        </Typography>
+                      </CardSendImage>
 
-            </ThumbsContainer>
-          </Box>
-        </Box>
-      </Container>
+                      {files.map((file, index) => (
+                        <Thumb
+                          key={file.name}
+                          style={{ backgroundImage: `url(${file.preview})` }}
+                        >
+                          {index === 0 &&
+                            <MainImage>
+                              <Typography variant='body' color='secondary'>
+                                Principal
+                              </Typography>
+                            </MainImage>
+                          }
+                          <Mask className='mask'>
+                            <IconButton color='secondary' onClick={() => handleRemoveFile(file.name)}>
+                              <DeleteForever />
+                            </IconButton>
+                          </Mask>
+                        </Thumb>
+                      ))}
 
-      <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
-          <Box sx={{ paddingY: 3 }}>
-            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-              Descrição
-            </Typography>
-            <Typography component='div' variant='body2' color='textPrimary'>
-              Escreva os detalhes do que está vendendo
-            </Typography>
-            <TextField
-              multiline
-              rows={6}
-              variant='outlined'
-              fullWidth
-            />
-          </Box>
-        </Box>
-      </Container>
+                    </ThumbsContainer>
+                  </Box>
+                </Box>
+              </Container>
 
-      <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
-          <Box sx={{ paddingY: 3 }}>
-            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-              Preço
-            </Typography>
-            <FormControl fullWidth variant='outlined'>
-              <InputLabel labelId="input-price">Valor</InputLabel>
-              <OutlinedInput
-                labelId="input-price"
-                id="input-price"
-                label="Valor"
-                onChange={() => { }}
-                startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
-              />
-            </FormControl>
-          </Box>
-        </Box>
-      </Container>
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                  <Box sx={{ paddingY: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Descrição
+                    </Typography>
+                    <Typography component='div' variant='body2' color='textPrimary'>
+                      Escreva os detalhes do que está vendendo
+                    </Typography>
+                    <TextField
+                      multiline
+                      rows={6}
+                      variant='outlined'
+                      fullWidth
+                    />
+                  </Box>
+                </Box>
+              </Container>
 
-      <Container sx={{ paddingBottom: 3 }}>
-        <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
-          <Box sx={{ paddingY: 3 }}>
-            <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-              Dados de Contato
-            </Typography>
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                  <Box sx={{ paddingY: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Preço
+                    </Typography>
+                    <FormControl fullWidth variant='outlined'>
+                      <InputLabel labelId="input-price">Valor</InputLabel>
+                      <OutlinedInput
+                        labelId="input-price"
+                        id="input-price"
+                        label="Valor"
+                        onChange={() => { }}
+                        startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
+                      />
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Container>
 
-            <TextField
-              label="Nome"
-              variant='outlined'
-              size='small'
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                  <Box sx={{ paddingY: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Dados de Contato
+                    </Typography>
 
-            <TextField
-              label="E-mail"
-              variant='outlined'
-              size='small'
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
+                    <TextField
+                      label="Nome"
+                      variant='outlined'
+                      size='small'
+                      fullWidth
+                      sx={{ marginBottom: 2 }}
+                    />
 
-            <TextField
-              label="Telefone"
-              type="number"
-              variant='outlined'
-              size='small'
-              fullWidth
-              sx={{ marginBottom: 2 }}
-            />
+                    <TextField
+                      label="E-mail"
+                      variant='outlined'
+                      size='small'
+                      fullWidth
+                      sx={{ marginBottom: 2 }}
+                    />
 
-          </Box>
-        </Box>
-      </Container>
+                    <TextField
+                      label="Telefone"
+                      type="number"
+                      variant='outlined'
+                      size='small'
+                      fullWidth
+                      sx={{ marginBottom: 2 }}
+                    />
 
-      <Container sx={{ paddingBottom: 3 }}>
-        <Box textAlign='right'>
-          <Button color='primary' variant='contained'>
-            Publicar anúncio
-          </Button>
-        </Box>
-      </Container>
+                  </Box>
+                </Box>
+              </Container>
 
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box textAlign='right'>
+                  <Button type='submit' color='primary' variant='contained'>
+                    Publicar anúncio
+                  </Button>
+                </Box>
+              </Container>
+            </form>
+          )
+        }}
+      </Formik>
     </TemplateDefault>
   )
 }

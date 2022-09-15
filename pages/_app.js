@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import { LightTheme } from '../src/themes/';
 import createEmotionCache from '../src/createEmotionCache';
+import '../src/TradutorYup';
 import '../src/styles/globals.css';
 
 // Client-side cache, shared for the whole session of the user in the browser.

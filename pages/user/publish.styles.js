@@ -10,7 +10,8 @@ export const CardSendImage = styled('Box')({
   justifyContent: 'center',
   border: theme.spacing(0.5),
   borderStyle: 'dashed',
-  backgroundColor: theme.palette.background.paper
+  backgroundColor: theme.palette.background.paper,
+  cursor: 'pointer',
 });
 
 export const ThumbsContainer = styled('Box')({
