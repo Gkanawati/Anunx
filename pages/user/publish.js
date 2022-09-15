@@ -14,6 +14,7 @@ import {
   IconButton,
   OutlinedInput,
   InputAdornment,
+  FormHelperText,
 } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
 
@@ -30,6 +31,7 @@ import { useDropzone } from 'react-dropzone';
 
 const validationSchema = yup.object().shape({
   title: yup.string().min(5).max(100).required(),
+  category: yup.string().required(),
 
 })
 
@@ -78,7 +80,7 @@ const Publish = () => {
       <Formik
         initialValues={{
           title: '',
-
+          category: ''
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -115,19 +117,34 @@ const Publish = () => {
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Categoria
                     </Typography>
-                    <FormControl fullWidth>
+                    <FormControl error={errors.category} fullWidth>
                       <InputLabel id="select-category">Categoria</InputLabel>
                       <Select
                         labelId="select-category"
                         id="select-category"
-                        value={category}
+                        name='category'
+                        value={values.category}
                         label="Categoria"
                         onChange={handleChange}
                       >
-                        <MenuItem value={10}>Computadores</MenuItem>
-                        <MenuItem value={20}>Automotivos</MenuItem>
-                        <MenuItem value={30}>Estética</MenuItem>
+                        <MenuItem value='Computadores'>Computadores</MenuItem>
+                        <MenuItem value='Celulares e Tablets'>Celulares e Tablets</MenuItem>
+                        <MenuItem value='Equipamentos e Ferramentas'>Equipamentos e Ferramentas</MenuItem>
+                        <MenuItem value='Automotivos'>Automotivos</MenuItem>
+                        <MenuItem value='Estética'>Estética</MenuItem>
+                        <MenuItem value='Bebê e Criança'>Bebê e Criança</MenuItem>
+                        <MenuItem value='Agricultura'>Agricultura</MenuItem>
+                        <MenuItem value='Animais'>Animais</MenuItem>
+                        <MenuItem value='Móveis, Casa e Jardim'>Móveis, Casa e Jardim </MenuItem>
+                        <MenuItem value='Imóveis'>Imóveis</MenuItem>
+                        <MenuItem value='Esporte'>Esporte</MenuItem>
+                        <MenuItem value='Lazer'>Lazer</MenuItem>
+                        <MenuItem value='Tecnologia'>Tecnologia</MenuItem>
+                        <MenuItem value='Outros'>Outros</MenuItem>
                       </Select>
+                      <FormHelperText>
+                        {errors.category}
+                      </FormHelperText>
                     </FormControl>
                   </Box>
                 </Box>
