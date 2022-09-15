@@ -15,6 +15,7 @@ import {
   OutlinedInput,
   InputAdornment,
   FormHelperText,
+  Input,
 } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
 
@@ -32,7 +33,7 @@ import { useDropzone } from 'react-dropzone';
 const validationSchema = yup.object().shape({
   title: yup.string().min(5).max(100).required(),
   category: yup.string().required(),
-
+  description: yup.string().min(40).max(1000).required(),
 })
 
 const Publish = () => {
@@ -80,7 +81,9 @@ const Publish = () => {
       <Formik
         initialValues={{
           title: '',
-          category: ''
+          category: '',
+          description: '',
+          price: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -98,34 +101,38 @@ const Publish = () => {
             <form onSubmit={handleSubmit}>
               <Container sx={{ paddingBottom: 3 }}>
                 <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
+
                   <Box sx={{ paddingBottom: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Título do Anúncio
                     </Typography>
-                    <TextField
-                      name='title'
-                      value={values.title}
-                      onChange={handleChange}
-                      label="Ex: Xbox One Series S"
-                      size='small'
-                      error={errors.title}
-                      helperText={errors.title}
-                      fullWidth
-                    />
+                    <FormControl error={errors.title} fullWidth>
+                      <InputLabel size='small' >Ex: Xbox One Series S</InputLabel>
+                      <OutlinedInput
+                        name='title'
+                        value={values.title}
+                        label='Ex: Xbox One Series S'
+                        onChange={handleChange}
+                        size='small'
+                      />
+                      <FormHelperText>
+                        {errors.title}
+                      </FormHelperText>
+                    </FormControl>
                   </Box>
+
                   <Box sx={{ minWidth: 120, paddingBottom: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Categoria
                     </Typography>
                     <FormControl error={errors.category} fullWidth>
-                      <InputLabel id="select-category">Categoria</InputLabel>
+                      <InputLabel size='small'>Categoria</InputLabel>
                       <Select
-                        labelId="select-category"
-                        id="select-category"
                         name='category'
                         value={values.category}
                         label="Categoria"
                         onChange={handleChange}
+                        size='small'
                       >
                         <MenuItem value='Computadores'>Computadores</MenuItem>
                         <MenuItem value='Celulares e Tablets'>Celulares e Tablets</MenuItem>
@@ -147,6 +154,7 @@ const Publish = () => {
                       </FormHelperText>
                     </FormControl>
                   </Box>
+
                 </Box>
               </Container>
 
@@ -202,12 +210,15 @@ const Publish = () => {
                     <Typography component='div' variant='body2' color='textPrimary'>
                       Escreva os detalhes do que está vendendo
                     </Typography>
-                    <TextField
-                      multiline
-                      rows={6}
-                      variant='outlined'
-                      fullWidth
-                    />
+                    <FormControl error={errors.description} fullWidth>
+                      <OutlinedInput
+                        multiline
+                        rows={7}
+                      />
+                      <FormHelperText>
+                        {errors.description}
+                      </FormHelperText>
+                    </FormControl>
                   </Box>
                 </Box>
               </Container>
