@@ -1,0 +1,128 @@
+import { Formik } from 'formik';
+import {
+  Container,
+  Box,
+  Typography,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  OutlinedInput,
+  Button
+} from '@mui/material';
+
+import TemplateDefault from '../../../src/templates/Default';
+import { LightTheme as theme } from '../../../src/themes/Light';
+import { initialValues, validationSchema } from './formValues';
+
+const Signup = () => {
+  return (
+    <TemplateDefault>
+      <Container maxWidth='md' >
+        <Container component='main' sx={{ marginBottom: 3 }}>
+          <Typography component='h1' variant='h2' align='center' color='textPrimary'>
+            Crie sua conta
+          </Typography>
+          <Typography component='h5' variant='h5' align='center' color='textPrimary'>
+            E anuncie para todo o Brasil
+          </Typography>
+        </Container>
+
+        <Container>
+          <Box
+            bgcolor={theme.palette.background.default}
+            sx={{ padding: 3, }}
+          >
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                console.log('Enviou o form', values)
+              }}
+            >
+              {
+                ({
+                  touched,
+                  values,
+                  errors,
+                  handleChange,
+                  handleSubmit,
+                }) => {
+                  return (
+                    <form onSubmit={handleSubmit}>
+                      <FormControl error={errors.name && touched.name} fullWidth sx={{ marginBottom: 2 }}>
+                        <InputLabel >Nome</InputLabel>
+                        <OutlinedInput
+                          name='name'
+                          onChange={handleChange}
+                          value={values.name}
+                          label="Nome"
+                        />
+                        <FormHelperText>
+                          {errors.name && touched.name && errors.name}
+                        </FormHelperText>
+                      </FormControl>
+
+                      <FormControl error={errors.email && touched.email} fullWidth sx={{ marginBottom: 2 }}>
+                        <InputLabel>E-mail</InputLabel>
+                        <OutlinedInput
+                          name='email'
+                          type='email'
+                          onChange={handleChange}
+                          value={values.email}
+                          label="E-mail"
+                        />
+                        <FormHelperText>
+                          {errors.email && touched.email && errors.email}
+                        </FormHelperText>
+                      </FormControl>
+
+                      <FormControl error={errors.password && touched.password} fullWidth sx={{ marginBottom: 2 }}>
+                        <InputLabel>Senha</InputLabel>
+                        <OutlinedInput
+                          name='password'
+                          type='password'
+                          onChange={handleChange}
+                          value={values.password}
+                          label="Senha"
+                        />
+                        <FormHelperText>
+                          {errors.password && touched.password && errors.password}
+                        </FormHelperText>
+                      </FormControl>
+
+                      <FormControl error={errors.passwordConf && touched.passwordConf} fullWidth sx={{ marginBottom: 2 }}>
+                        <InputLabel>Confirme a senha</InputLabel>
+                        <OutlinedInput
+                          name='passwordConf'
+                          type='password'
+                          onChange={handleChange}
+                          value={values.passwordConf}
+                          label="Confirme a senha"
+                        />
+                        <FormHelperText>
+                          {errors.passwordConf && touched.passwordConf && errors.passwordConf}
+                        </FormHelperText>
+                      </FormControl>
+
+                      <Button
+                        type='submit'
+                        fullWidth
+                        variant='contained'
+                        color='primary'
+                        size='large'
+                      >
+                        Cadastrar
+                      </Button>
+                    </form>
+                  )
+                }
+              }
+            </Formik>
+          </Box>
+        </Container>
+      </Container>
+    </TemplateDefault>
+  )
+}
+
+export default Signup
