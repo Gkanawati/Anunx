@@ -8,7 +8,7 @@ export const CardSendImage = styled('Box')({
   textAlign: 'center',
   alignItems: 'center',
   justifyContent: 'center',
-  border: theme.spacing(0.5),
+  border: theme.spacing(0.3),
   borderStyle: 'dashed',
   backgroundColor: theme.palette.background.paper,
   cursor: 'pointer',
@@ -16,7 +16,8 @@ export const CardSendImage = styled('Box')({
 
 export const ThumbsContainer = styled('Box')({
   display: 'flex',
-  margin: theme.spacing(2),
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
   gap: theme.spacing(2),
   flexWrap: 'wrap',
 });
