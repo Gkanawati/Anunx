@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { LightTheme as theme } from '../../src/themes/Light';
+import { LightTheme as theme } from '../../../src/themes/Light';
 
 export const CardSendImage = styled('Box')({
   width: 200,

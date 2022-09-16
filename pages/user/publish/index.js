@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Formik } from 'formik';
-import * as yup from 'yup';
 import {
   Typography,
   Box,
@@ -10,39 +8,17 @@ import {
   FormControl,
   Select,
   Button,
-  IconButton,
   OutlinedInput,
   InputAdornment,
   FormHelperText,
 } from '@mui/material';
-import { DeleteForever } from '@mui/icons-material';
 
-import {
-  CardSendImage,
-  MainImage,
-  Mask,
-  Thumb,
-  ThumbsContainer
-} from './publish.styles';
-import TemplateDefault from '../../src/templates/Default';
-import { LightTheme as theme } from '../../src/themes/Light';
-import { useDropzone } from 'react-dropzone';
-
-const validationSchema = yup.object().shape({
-  title: yup.string().min(5).max(100).required(),
-  category: yup.string().required(),
-  description: yup.string().min(40).max(1000).required(),
-  price: yup.number().required(),
-  name: yup.string().required(),
-  email: yup.string().email().required(),
-  phone: yup.number().required(),
-  files: yup.array().min(1, 'Envie pelo menos uma foto').required(),
-})
+import TemplateDefault from '../../../src/templates/Default';
+import { LightTheme as theme } from '../../../src/themes/Light';
+import { initialValues, validationSchema } from './formValues';
+import FileUpload from '../../../src/components/FileUpload';
 
 const Publish = () => {
-
-  const [category, setCategory] = useState('');
-
   return (
     <TemplateDefault>
       <Container maxWidth='lg' sx={{ marginBottom: 3 }}>
@@ -55,16 +31,7 @@ const Publish = () => {
       </Container>
 
       <Formik
-        initialValues={{
-          title: '',
-          category: '',
-          description: '',
-          price: '',
-          name: '',
-          email: '',
-          phone: '',
-          files: [],
-        }}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log('Enviou o form', values)
@@ -78,26 +45,7 @@ const Publish = () => {
           handleSubmit,
           setFieldValue,
         }) => {
-          const { getRootProps, getInputProps } = useDropzone({
-            accept: 'image/*',
-            onDrop: (acceptedFile) => {
-              const newFiles = acceptedFile.map(file => {
-                return Object.assign(file, {
-                  preview: URL.createObjectURL(file)
-                })
-              })
 
-              setFieldValue('files', [
-                ...values.files,
-                ...newFiles
-              ])
-            }
-          })
-
-          const handleRemoveFile = (fileName) => {
-            const newFiles = values.files.filter(item => item.name !== fileName)
-            setFieldValue('files', newFiles)
-          }
           return (
             <form onSubmit={handleSubmit}>
               <Container sx={{ paddingBottom: 3 }}>
@@ -159,52 +107,12 @@ const Publish = () => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
-                  <Box sx={{ paddingY: 3 }}>
-                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
-                      Imagens
-                    </Typography>
-                    <Typography component='div' variant='body2' color='textPrimary' gutterBottom>
-                      A primeira imagem é a foto principal do seu anúncio
-                    </Typography>
-
-                    {errors.files && touched.files && (
-                      <Typography variant='body2' color='error' gutterBottom>
-                        {errors.files && touched.files && errors.files}
-                      </Typography>
-                    )}
-
-                    <ThumbsContainer>
-                      <CardSendImage {...getRootProps()}>
-                        <input name='files' {...getInputProps()} />
-                        <Typography variant='body2' color={errors.files && touched.files ? 'error' : 'textPrimary'}>
-                          Clique para adicionar ou arraste a imagem aqui.
-                        </Typography>
-                      </CardSendImage>
-
-                      {values.files.map((file, index) => (
-                        <Thumb
-                          key={file.name}
-                          style={{ backgroundImage: `url(${file.preview})` }}
-                        >
-                          {index === 0 &&
-                            <MainImage>
-                              <Typography variant='body' color='secondary'>
-                                Principal
-                              </Typography>
-                            </MainImage>
-                          }
-                          <Mask className='mask'>
-                            <IconButton color='secondary' onClick={() => handleRemoveFile(file.name)}>
-                              <DeleteForever />
-                            </IconButton>
-                          </Mask>
-                        </Thumb>
-                      ))}
-
-                    </ThumbsContainer>
-                  </Box>
-                </Box>
+                <FileUpload
+                  setFieldValue={setFieldValue}
+                  files={values.files}
+                  errors={errors.files}
+                  touched={touched.files}
+                />
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
@@ -325,6 +233,5 @@ const Publish = () => {
     </TemplateDefault>
   )
 }
-
 
 export default Publish
