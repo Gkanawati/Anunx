@@ -15,7 +15,6 @@ import {
   OutlinedInput,
   InputAdornment,
   FormHelperText,
-  Input,
 } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
 
@@ -34,6 +33,10 @@ const validationSchema = yup.object().shape({
   title: yup.string().min(5).max(100).required(),
   category: yup.string().required(),
   description: yup.string().min(40).max(1000).required(),
+  price: yup.number().required(),
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  phone: yup.number().required(),
 })
 
 const Publish = () => {
@@ -84,6 +87,9 @@ const Publish = () => {
           category: '',
           description: '',
           price: '',
+          name: '',
+          email: '',
+          phone: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -107,7 +113,7 @@ const Publish = () => {
                       Título do Anúncio
                     </Typography>
                     <FormControl error={errors.title} fullWidth>
-                      <InputLabel size='small' >Ex: Xbox One Series S</InputLabel>
+                      <InputLabel size='small'>Ex: Xbox One Series S</InputLabel>
                       <OutlinedInput
                         name='title'
                         value={values.title}
@@ -212,8 +218,10 @@ const Publish = () => {
                     </Typography>
                     <FormControl error={errors.description} fullWidth>
                       <OutlinedInput
+                        name='description'
                         multiline
                         rows={7}
+                        onChange={handleChange}
                       />
                       <FormHelperText>
                         {errors.description}
@@ -229,15 +237,17 @@ const Publish = () => {
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Preço
                     </Typography>
-                    <FormControl fullWidth variant='outlined'>
-                      <InputLabel labelId="input-price">Valor</InputLabel>
+                    <FormControl fullWidth error={errors.price}>
+                      <InputLabel>Valor</InputLabel>
                       <OutlinedInput
-                        labelId="input-price"
-                        id="input-price"
+                        name='price'
                         label="Valor"
-                        onChange={() => { }}
+                        onChange={handleChange}
                         startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
                       />
+                      <FormHelperText>
+                        {errors.price}
+                      </FormHelperText>
                     </FormControl>
                   </Box>
                 </Box>
@@ -250,30 +260,48 @@ const Publish = () => {
                       Dados de Contato
                     </Typography>
 
-                    <TextField
-                      label="Nome"
-                      variant='outlined'
-                      size='small'
-                      fullWidth
-                      sx={{ marginBottom: 2 }}
-                    />
+                    <FormControl error={errors.name} fullWidth sx={{ marginBottom: 2 }}>
+                      <InputLabel size='small'>Nome</InputLabel>
+                      <OutlinedInput
+                        name='name'
+                        onChange={handleChange}
+                        label="Nome"
+                        variant='outlined'
+                        size='small'
+                      />
+                      <FormHelperText>
+                        {errors.name}
+                      </FormHelperText>
+                    </FormControl>
 
-                    <TextField
-                      label="E-mail"
-                      variant='outlined'
-                      size='small'
-                      fullWidth
-                      sx={{ marginBottom: 2 }}
-                    />
+                    <FormControl error={errors.email} fullWidth sx={{ marginBottom: 2 }}>
+                      <InputLabel size='small'>E-mail</InputLabel>
+                      <OutlinedInput
+                        name='email'
+                        onChange={handleChange}
+                        label="E-mail"
+                        variant='outlined'
+                        size='small'
+                      />
+                      <FormHelperText>
+                        {errors.email}
+                      </FormHelperText>
+                    </FormControl>
 
-                    <TextField
-                      label="Telefone"
-                      type="number"
-                      variant='outlined'
-                      size='small'
-                      fullWidth
-                      sx={{ marginBottom: 2 }}
-                    />
+                    <FormControl error={errors.phone} fullWidth sx={{ marginBottom: 2 }}>
+                      <InputLabel size='small'>Telefone</InputLabel>
+                      <OutlinedInput
+                        name='phone'
+                        onChange={handleChange}
+                        label="Telefone"
+                        type="number"
+                        variant='outlined'
+                        size='small'
+                      />
+                      <FormHelperText>
+                        {errors.phone}
+                      </FormHelperText>
+                    </FormControl>
 
                   </Box>
                 </Box>
