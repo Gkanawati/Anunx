@@ -176,7 +176,6 @@ const Publish = () => {
                         onChange={handleChange}
                         value={values.name}
                         label="Nome"
-                        variant='outlined'
                         size='small'
                       />
                       <FormHelperText>
@@ -191,7 +190,6 @@ const Publish = () => {
                         onChange={handleChange}
                         value={values.email}
                         label="E-mail"
-                        variant='outlined'
                         size='small'
                       />
                       <FormHelperText>
@@ -207,7 +205,6 @@ const Publish = () => {
                         value={values.phone}
                         label="Telefone"
                         type="number"
-                        variant='outlined'
                         size='small'
                       />
                       <FormHelperText>
