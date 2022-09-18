@@ -7,6 +7,7 @@ import { LightTheme } from '../src/themes/';
 import createEmotionCache from '../src/createEmotionCache';
 import '../src/TradutorYup';
 import '../src/styles/globals.css';
+import { ToastProvider } from '../src/contexts/Toast';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -21,9 +22,10 @@ export default function MyApp(props) {
         <title>Anunx</title>
       </Head>
       <ThemeProvider theme={LightTheme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Component {...pageProps} />
+        <ToastProvider>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ToastProvider>
       </ThemeProvider>
     </CacheProvider>
   );
