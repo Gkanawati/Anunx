@@ -21,7 +21,7 @@ import { initialValues, validationSchema } from './formValues';
 import useToast from '../../../src/contexts/Toast';
 import Image from 'next/image';
 
-const Signin = () => {
+const Signin = ({ APP_URL }) => {
 
   const router = useRouter()
   const { setToast } = useToast()
@@ -33,13 +33,13 @@ const Signin = () => {
     signIn('credentials', {
       email: values.email,
       password: values.password,
-      callbackUrl: 'http://localhost:3000/user/dashboard'
+      callbackUrl: `${APP_URL}/user/dashboard`
     })
   }
 
   const handleGoogleLogin = () => {
     signIn('google', {
-      callbackUrl: 'http://localhost:3000/user/dashboard'
+      callbackUrl: `${APP_URL}/user/dashboard`
     })
   }
 
@@ -181,6 +181,11 @@ const styles = {
       padding: '0 25px',
     }
   }
+}
+
+export async function getServerSideProps() {
+  const APP_URL = process.env.APP_URL
+  return { props: { APP_URL } }
 }
 
 export default Signin
