@@ -4,6 +4,10 @@ import Providers from "next-auth/providers"
 
 export default NextAuth({
   providers: [
+    Providers.Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
     Providers.Credentials({
       name: 'Credentials',
       async authorize(credentials, req) {
@@ -17,7 +21,7 @@ export default NextAuth({
           throw '/auth/signin?i=1'
         }
       }
-    })
+    }),
   ],
 
   session: {

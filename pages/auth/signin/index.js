@@ -19,6 +19,7 @@ import TemplateDefault from '../../../src/templates/Default';
 import { LightTheme as theme } from '../../../src/themes/Light';
 import { initialValues, validationSchema } from './formValues';
 import useToast from '../../../src/contexts/Toast';
+import Image from 'next/image';
 
 const Signin = () => {
 
@@ -36,10 +37,15 @@ const Signin = () => {
     })
   }
 
+  const handleGoogleLogin = () => {
+    signIn('google', {
+      callbackUrl: 'http://localhost:3000/user/dashboard'
+    })
+  }
 
   return (
     <TemplateDefault>
-      <Container maxWidth='md' >
+      <Container maxWidth='sm' >
         <Container component='main' sx={{ marginBottom: 3 }}>
           <Typography component='h1' variant='h2' align='center' color='textPrimary'>
             Entre na sua conta
@@ -125,6 +131,29 @@ const Signin = () => {
                           </Button>
                         )
                       }
+
+                      <Box sx={styles.orSeparator}>
+                        <span>ou</span>
+                      </Box>
+
+                      <Box sx={{ marginTop: 2 }}>
+                        <Button
+                          variant='contained'
+                          color='secondary'
+                          fullWidth
+                          size='large'
+                          startIcon={
+                            <Image
+                              src="/images/Google_logo.webp"
+                              width={25}
+                              height={25}
+                              alt="Login com Google"
+                            />
+                          }
+                          onClick={handleGoogleLogin}>
+                          Entrar com Google
+                        </Button>
+                      </Box>
                     </form>
                   )
                 }
@@ -135,6 +164,23 @@ const Signin = () => {
       </Container>
     </TemplateDefault>
   )
+}
+
+const styles = {
+  orSeparator: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e8e8e8',
+    width: '100%',
+    height: '1px',
+    marginY: 4,
+
+    '& span': {
+      backgroundColor: 'white',
+      padding: '0 25px',
+    }
+  }
 }
 
 export default Signin
