@@ -113,7 +113,7 @@ const Signin = ({ APP_URL }) => {
                         </FormHelperText>
                       </FormControl>
                       {isSubmitting
-                        ? <CircularProgress sx={{
+                        ? <CircularProgress size='sm' sx={{
                           display: 'block',
                           marginY: 1,
                           marginX: 'auto',

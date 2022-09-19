@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { Formik } from 'formik';
+import { useRouter } from 'next/router';
 import {
   Typography,
   Box,
@@ -11,14 +13,66 @@ import {
   OutlinedInput,
   InputAdornment,
   FormHelperText,
+  Input,
+  CircularProgress,
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
 import { LightTheme as theme } from '../../../src/themes/Light';
 import { initialValues, validationSchema } from './formValues';
 import FileUpload from '../../../src/components/FileUpload';
+import useToast from '../../../src/contexts/Toast';
+import { getSession } from 'next-auth/client';
 
-const Publish = () => {
+const Publish = ({ userId, image }) => {
+
+  const router = useRouter()
+  const { setToast } = useToast()
+
+  const formValues = {
+    ...initialValues,
+  }
+
+  formValues.userId = userId
+  formValues.image = image
+
+  const handleSuccess = () => {
+    setToast({
+      open: true,
+      text: 'Anúncio cadastrado com sucesso',
+      severity: 'success',
+    })
+
+    router.push('/user/dashboard')
+  }
+
+  const handleError = () => {
+    setToast({
+      open: true,
+      text: 'Ops, ocorreu um erro. Tente novamente.',
+      severity: 'error',
+    })
+  }
+
+  const handleFormSubmit = (values) => {
+    const formData = new FormData()
+
+    for (let field in values) {
+      if (field == 'files') {
+        values.files.forEach(file => {
+          formData.append('files', file)
+        })
+      }
+      else {
+        formData.append(field, values[field])
+      }
+    }
+
+    axios.post('/api/products', formData)
+      .then(handleSuccess)
+      .catch(handleError)
+  }
+
   return (
     <TemplateDefault>
       <Container maxWidth='lg' sx={{ marginBottom: 3 }}>
@@ -31,11 +85,9 @@ const Publish = () => {
       </Container>
 
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log('Enviou o form', values)
-        }}
+        onSubmit={(values) => handleFormSubmit(values)}
       >
         {({
           touched,
@@ -44,10 +96,14 @@ const Publish = () => {
           handleChange,
           handleSubmit,
           setFieldValue,
+          isSubmitting,
         }) => {
 
           return (
             <form onSubmit={handleSubmit}>
+              <Input type='hidden' name='userId' value={values.userId} />
+              <Input type='hidden' name='image' value={values.image} />
+
               <Container sx={{ paddingBottom: 3 }}>
                 <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
 
@@ -84,7 +140,7 @@ const Publish = () => {
                         size='small'
                       >
                         <MenuItem value='Computadores'>Computadores</MenuItem>
-                        <MenuItem value='Tecnologia'>Eletrônicos e celulares</MenuItem>
+                        <MenuItem value='Eletrônicos e celulares'>Eletrônicos e celulares</MenuItem>
                         <MenuItem value='Equipamentos e Ferramentas'>Equipamentos e Ferramentas</MenuItem>
                         <MenuItem value='Automotivos'>Automotivos</MenuItem>
                         <MenuItem value='Estética'>Estética</MenuItem>
@@ -218,9 +274,14 @@ const Publish = () => {
 
               <Container sx={{ paddingBottom: 3 }}>
                 <Box textAlign='right'>
-                  <Button type='submit' color='primary' variant='contained'>
-                    Publicar anúncio
-                  </Button>
+                  {isSubmitting
+                    ? <CircularProgress size={30} sx={{ marginRight: 2 }} />
+                    : (
+                      <Button type='submit' color='primary' variant='contained'>
+                        Publicar anúncio
+                      </Button>
+                    )
+                  }
                 </Box>
               </Container>
             </form>
@@ -232,5 +293,17 @@ const Publish = () => {
 }
 
 Publish.requireAuth = true
+
+
+export async function getServerSideProps({ req }) {
+  const { userId, user } = await getSession({ req })
+
+  return {
+    props: {
+      userId,
+      image: user.image,
+    }
+  }
+}
 
 export default Publish
