@@ -8,6 +8,7 @@ import { LightTheme } from '../src/themes/';
 import createEmotionCache from '../src/createEmotionCache';
 import '../src/TradutorYup';
 import '../src/styles/globals.css';
+import CheckAuth from '../src/components/CheckAuth';
 import { ToastProvider } from '../src/contexts/Toast';
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -26,7 +27,12 @@ export default function MyApp(props) {
         <ThemeProvider theme={LightTheme}>
           <ToastProvider>
             <CssBaseline />
-            <Component {...pageProps} />
+            {
+              Component.requireAuth
+                ? <CheckAuth Component={Component} pageProps={pageProps} />
+                : <Component {...pageProps} />
+            }
+
           </ToastProvider>
         </ThemeProvider>
       </Provider>
