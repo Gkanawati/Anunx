@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/client';
 import {
   AppBar,
   Typography,
@@ -17,6 +18,8 @@ import { AccountCircle } from '@mui/icons-material';
 
 export default function Header() {
 
+  const [session] = useSession()
+
   const [anchorUserMenu, setAnchorUserMenu] = useState(false);
 
   const openUserMenu = Boolean(anchorUserMenu)
@@ -32,21 +35,23 @@ export default function Header() {
               </Typography>
             </a>
           </Link>
-          <Link href="/user/publish" passHref>
+          <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
             <Button color="inherit" variant="outlined">
               Anunciar e Vender
             </Button>
           </Link>
-          <IconButton color='secondary' onClick={(e) => setAnchorUserMenu(e.currentTarget)}>
-            {
-              true === false
-                ? <Avatar src="" />
-                : <AccountCircle />
-            }
-            <Typography variant='subtitle2' color='secondary' sx={{ paddingLeft: '6px' }}>
-              Gabriel Kanawati
-            </Typography>
-          </IconButton>
+          {session && (
+            <IconButton color='secondary' onClick={(e) => setAnchorUserMenu(e.currentTarget)} sx={{ paddingLeft: 2 }}>
+              {
+                session.user.image
+                  ? <Avatar src={session.user.image} />
+                  : <AccountCircle />
+              }
+              <Typography variant='subtitle2' color='secondary' sx={{ paddingLeft: 1 }}>
+                {session.user.name}
+              </Typography>
+            </IconButton>
+          )}
 
           <Menu
             anchorEl={anchorUserMenu}
@@ -64,7 +69,11 @@ export default function Header() {
               <MenuItem>Publicar novo anúncio</MenuItem>
             </Link>
             <Divider />
-            <MenuItem>Sair</MenuItem>
+            <MenuItem onClick={() => signOut({
+              callbackUrl: '/'
+            })}>
+              Sair
+            </MenuItem>
           </Menu>
         </Toolbar>
       </Container>
