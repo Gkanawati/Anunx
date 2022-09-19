@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Formik } from 'formik';
+import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/client';
 import {
   Container,
   Box,
@@ -9,22 +11,29 @@ import {
   InputLabel,
   OutlinedInput,
   Button,
-  CircularProgress
+  CircularProgress,
+  Alert
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
 import { LightTheme as theme } from '../../../src/themes/Light';
 import { initialValues, validationSchema } from './formValues';
 import useToast from '../../../src/contexts/Toast';
-import { useRouter } from 'next/router';
 
 const Signin = () => {
 
   const router = useRouter()
   const { setToast } = useToast()
+  const [session] = useSession()
+
+  console.log(session, router.query.i);
 
   const handleFormSubmit = async values => {
-
+    signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      callbackUrl: 'http://localhost:3000/user/dashboard'
+    })
   }
 
 
@@ -60,7 +69,16 @@ const Signin = () => {
                 }) => {
                   return (
                     <form onSubmit={handleSubmit}>
-
+                      {
+                        router.query.i === '1' && (
+                          <Alert
+                            severity='error'
+                            sx={{ marginBottom: 2 }}
+                          >
+                            Usuário ou senha inválidos
+                          </Alert>
+                        )
+                      }
                       <FormControl error={errors.email && touched.email} fullWidth sx={{ marginBottom: 2 }}>
                         <InputLabel>E-mail</InputLabel>
                         <OutlinedInput

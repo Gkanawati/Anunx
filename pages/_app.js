@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { Provider } from "next-auth/client"
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
@@ -21,12 +22,14 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Anunx</title>
       </Head>
-      <ThemeProvider theme={LightTheme}>
-        <ToastProvider>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ToastProvider>
-      </ThemeProvider>
+      <Provider session={pageProps.session}>
+        <ThemeProvider theme={LightTheme}>
+          <ToastProvider>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ToastProvider>
+        </ThemeProvider>
+      </Provider>
     </CacheProvider>
   );
 }

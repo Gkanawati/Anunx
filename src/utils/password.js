@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt, { hash } from 'bcrypt';
 
 const crypto = async (pwd) => {
   const salt = await bcrypt.genSalt()
@@ -8,4 +8,9 @@ const crypto = async (pwd) => {
   return password
 }
 
-export { crypto }
+const compare = (pwd, hash) => {
+  const result = bcrypt.compare(pwd, hash)
+  return result
+}
+
+export { crypto, compare }
