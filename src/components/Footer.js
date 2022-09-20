@@ -6,7 +6,7 @@ import {
   useMediaQuery
 } from "@mui/material"
 import Link from "next/link"
-import { LightTheme } from "../themes/Light"
+import { theme } from "../themes"
 
 const Footer = () => {
 
@@ -23,12 +23,12 @@ const Footer = () => {
         paddingTop: 3,
         paddingBottom: 3
       }, {
-        borderTop: `1px solid ${LightTheme.palette.divider}`,
+        borderTop: `1px solid ${theme.palette.divider}`,
       }]}
     >
       <Grid container spacing={3}>
         <Grid item xs={6} sm={3}>
-          <Box sx={{ color: LightTheme.palette.primary }} textAlign='center'>
+          <Box sx={{ color: theme.palette.primary }} textAlign='center'>
             <Link href="#">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>
@@ -39,7 +39,7 @@ const Footer = () => {
           </Box>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Box sx={{ color: LightTheme.palette.primary }} textAlign='center'>
+          <Box sx={{ color: theme.palette.primary }} textAlign='center'>
             <Link href="#">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>
@@ -50,7 +50,7 @@ const Footer = () => {
           </Box>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Box sx={{ color: LightTheme.palette.primary }} textAlign='center'>
+          <Box sx={{ color: theme.palette.primary }} textAlign='center'>
             <Link href="#">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>
@@ -61,7 +61,7 @@ const Footer = () => {
           </Box>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Box sx={{ color: LightTheme.palette.primary }} textAlign='center'>
+          <Box sx={{ color: theme.palette.primary }} textAlign='center'>
             <Link href="#">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>

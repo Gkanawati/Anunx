@@ -9,7 +9,7 @@ import {
   Thumb,
   ThumbsContainer
 } from './fileUpload.styles';
-import { LightTheme as theme } from '../../../src/themes/Light';
+import { theme as theme } from '../../../src/themes';
 
 const FileUpload = ({ files, errors, touched, setFieldValue }) => {
 

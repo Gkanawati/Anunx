@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel'
 
-import { LightTheme } from '../../../src/themes/Light';
+import { theme } from '../../../src/themes';
 import TemplateDefault from '../../../src/templates/Default';
 import ProductsModel from '../../../src/models/products';
 import dbConnect from '../../../src/utils/dbConnect';
@@ -24,7 +24,7 @@ const Product = ({ product }) => {
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Box
-              bgcolor={LightTheme.palette.background.default}
+              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
             >
               <Carousel autoPlay={false} animation='slide' navButtonsAlwaysVisible indicators={false}>
@@ -42,7 +42,7 @@ const Product = ({ product }) => {
             </Box>
 
             <Box
-              bgcolor={LightTheme.palette.background.default}
+              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
               textAlign='left'
             >
@@ -59,7 +59,7 @@ const Product = ({ product }) => {
             </Box>
 
             <Box
-              bgcolor={LightTheme.palette.background.default}
+              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
               textAlign='left'
             >
@@ -75,7 +75,7 @@ const Product = ({ product }) => {
           <Grid item xs={4}>
             <Card
               elevation={0}
-              sx={{ backgroundColor: LightTheme.palette.background.default, padding: 1, marginBottom: 3 }}
+              sx={{ backgroundColor: theme.palette.background.default, padding: 1, marginBottom: 3 }}
             >
               <CardHeader
                 avatar={
@@ -93,7 +93,7 @@ const Product = ({ product }) => {
             </Card>
 
             <Box
-              bgcolor={LightTheme.palette.background.default}
+              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
             >
               <Typography component='h6' variant='h6'>

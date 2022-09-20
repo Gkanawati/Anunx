@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { LightTheme as theme } from '../../../src/themes/Light';
+import { theme as theme } from '../../../src/themes';
 import { initialValues, validationSchema } from './formValues';
 import useToast from '../../../src/contexts/Toast';
 import { useRouter } from 'next/router';

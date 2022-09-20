@@ -13,7 +13,7 @@ import {
 import { Search } from '@mui/icons-material';
 
 import TemplateDefault from '../../src/templates/Default';
-import { LightTheme } from '../../src/themes/Light';
+import { theme } from '../../src/themes';
 import Card from '../../src/components/Card';
 import ProductsModel from '../../src/models/products';
 import { formatCurrency } from '../../src/utils/currency';
@@ -28,21 +28,21 @@ const List = ({ products, query }) => {
         <InputSearch />
 
         <Box
-          bgcolor={LightTheme.palette.background.default}
+          bgcolor={theme.palette.background.default}
           sx={{ padding: 3 }}
         >
           <Typography component='h6' variant='h6'>
             Anúncios
           </Typography>
           <Typography sx={{ textTransform: 'uppercase', display: 'block', marginBottom: 2 }} component='span' variant='subtitle2'>
-            {
-              products.length > 1
-                ? 'Encontrados'
-                : 'Encontrado'
-            } {products.length} {
+            {products.length} {
               products.length > 1
                 ? 'Anúncios'
                 : 'Anúncio'
+            } {
+              products.length > 1
+                ? 'Encontrados'
+                : 'Encontrado'
             } para "{query}"
           </Typography>
           <Grid container spacing={4}>

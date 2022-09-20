@@ -4,7 +4,7 @@ import { Provider } from "next-auth/client"
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
-import { LightTheme } from '../src/themes/';
+import { theme } from '../src/themes/';
 import createEmotionCache from '../src/createEmotionCache';
 import '../src/TradutorYup';
 import '../src/styles/globals.css';
@@ -24,7 +24,7 @@ export default function MyApp(props) {
         <title>Anunx</title>
       </Head>
       <Provider session={pageProps.session}>
-        <ThemeProvider theme={LightTheme}>
+        <ThemeProvider theme={theme}>
           <ToastProvider>
             <CssBaseline />
             {
