@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import slugify from 'slugify';
 import {
   Container,
   Grid,
@@ -13,8 +17,7 @@ import Card from '../src/components/Card';
 import dbConnect from '../src/utils/dbConnect';
 import { formatCurrency } from '../src/utils/currency';
 import ProductsModel from '../src/models/products';
-import Link from 'next/link';
-import slugify from 'slugify';
+import InputSearch from '../src/components/InputSearch';
 
 const Home = ({ products }) => {
   return (
@@ -24,23 +27,9 @@ const Home = ({ products }) => {
           <Typography component='h1' variant='h3' align='center' color='textPrimary'>
             O que deseja encontrar?
           </Typography>
-          <Paper sx={{
-            paddingX: 2,
-            marginTop: 3,
-            display: 'flex',
-            justifyContent: 'center',
-            backgroundColor: '#fff',
-          }}>
-            <InputBase
-              placeholder='Ex: Apple MacBook Pro'
-              fullWidth
-            />
-            <IconButton>
-              <Search />
-            </IconButton>
-          </Paper>
+          <InputSearch />
         </Container>
-        <Container maxWidth='lg' sx={{ paddingTop: 6 }}>
+        <Container maxWidth='lg' >
           <Typography component='h1' variant='h4' align='center' color='textPrimary' sx={{ paddingBottom: 2 }}>
             Destaques
           </Typography>
@@ -62,14 +51,12 @@ const Home = ({ products }) => {
                     </Link>
                   </Grid>
                 )
-              }
-
-              )
+              })
             }
           </Grid>
         </Container>
       </Container>
-    </TemplateDefault>
+    </TemplateDefault >
   )
 }
 
