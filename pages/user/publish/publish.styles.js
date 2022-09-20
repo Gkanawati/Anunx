@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { theme as theme } from '../../../src/themes';
+import { theme } from '../../../src/themes';
 
 export const CardSendImage = styled('Box')({
   width: 200,

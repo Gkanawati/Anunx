@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { theme as theme } from '../../../src/themes';
+import { theme } from '../../../src/themes';
 import { initialValues, validationSchema } from './formValues';
 import FileUpload from '../../../src/components/FileUpload';
 import useToast from '../../../src/contexts/Toast';
