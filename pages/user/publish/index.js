@@ -46,19 +46,20 @@ const Publish = ({ userId, image }) => {
     router.push('/user/dashboard')
   }
 
-  const handleError = () => {
+  const handleError = (error) => {
     setToast({
       open: true,
       text: 'Ops, ocorreu um erro. Tente novamente.',
       severity: 'error',
     })
+    console.log(error)
   }
 
   const handleFormSubmit = (values) => {
     const formData = new FormData()
 
     for (let field in values) {
-      if (field == 'files') {
+      if (field === 'files') {
         values.files.forEach(file => {
           formData.append('files', file)
         })
@@ -68,9 +69,9 @@ const Publish = ({ userId, image }) => {
       }
     }
 
-    axios.post('/api/products', formData)
+    axios.post('/api/products/add', formData)
       .then(handleSuccess)
-      .catch(handleError)
+      .catch(error => handleError(error))
   }
 
   return (

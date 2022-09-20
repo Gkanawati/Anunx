@@ -23,7 +23,6 @@ const post = async (req, res) => {
       ? files
       : [files]
 
-
     const filesToSave = []
 
     filesToRename.forEach(file => {
@@ -33,8 +32,8 @@ const post = async (req, res) => {
 
       const fileName = `${timeStamp}_${randomNumber}${extension}`
 
-      const oldPath = path.join(__dirname, `../../../../${file.path}`)
-      const newPath = path.join(__dirname, `../../../../${form.uploadDir}/${fileName}`)
+      const oldPath = path.join(__dirname, `../../../../../${file.path}`)
+      const newPath = path.join(__dirname, `../../../../../${form.uploadDir}/${fileName}`)
 
       filesToSave.push({
         name: fileName,
@@ -44,7 +43,7 @@ const post = async (req, res) => {
       fs.rename(oldPath, newPath, (error) => {
         if (error) {
           console.log(error)
-          return res.status(500).json({ success: false })
+          return res.status(500).json({ success: false, erro: "RENAME FILE ERROR" })
         }
       })
     })
@@ -87,4 +86,19 @@ const post = async (req, res) => {
   })
 }
 
-export { post }
+const remove = async (req, res) => {
+  await dbConnect()
+
+  const id = req.body.id
+
+  const deleted = await ProductsModel.findOneAndRemove({ _id: id })
+
+  if (deleted) {
+    res.status(200).json({ success: true })
+  }
+  else {
+    res.status(500).json({ success: false })
+  }
+}
+
+export { post, remove }
