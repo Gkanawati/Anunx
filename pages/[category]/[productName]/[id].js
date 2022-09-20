@@ -8,27 +8,16 @@ import {
   Container,
   Grid,
   Typography,
-  Paper,
-  Button
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel'
 
-import { LightTheme } from '../../src/themes/Light';
-import TemplateDefault from '../../src/templates/Default';
+import { LightTheme } from '../../../src/themes/Light';
+import TemplateDefault from '../../../src/templates/Default';
+import ProductsModel from '../../../src/models/products';
+import dbConnect from '../../../src/utils/dbConnect';
+import { formatCurrency } from '../../../src/utils/currency';
 
-const Product = () => {
-
-  var items = [
-    {
-      name: "Random Name #1",
-      description: "Probably the most random thing you have ever seen!"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!"
-    }
-  ]
-
+const Product = ({ product }) => {
   return (
     <TemplateDefault>
       <Container maxWidth='lg'>
@@ -39,20 +28,16 @@ const Product = () => {
               sx={{ padding: 3, marginBottom: 3 }}
             >
               <Carousel autoPlay={false} animation='slide' navButtonsAlwaysVisible indicators={false}>
-                <Card sx={{ height: '100%' }}>
-                  <CardMedia
-                    sx={{ paddingTop: '56%' }}
-                    image='https://source.unsplash.com/random?a=1'
-                    title='Titulo da Imagem'
-                  />
-                </Card>
-                <Card sx={{ height: '100%' }}>
-                  <CardMedia
-                    sx={{ paddingTop: '56%' }}
-                    image='https://source.unsplash.com/random?a=2'
-                    title='Titulo da Imagem'
-                  />
-                </Card>
+                {
+                  product.files.map(file =>
+                    <Card key={file.name} sx={{ height: '100%' }}>
+                      <CardMedia
+                        sx={{ paddingTop: '56%' }}
+                        image={`/uploads/${file.name}`}
+                      />
+                    </Card>
+                  )
+                }
               </Carousel>
             </Box>
 
@@ -62,15 +47,15 @@ const Product = () => {
               textAlign='left'
             >
               <Typography component='span' variant='caption'>
-                Publicado 16 junho de 2021
+                Publicado 16 junho de 2021 - TO DO
               </Typography>
               <Typography component='h4' variant='h4' sx={{ marginY: 2 }}>
-                Jaguar XE 2.0 D R-Sport Aut.
+                {product.title}
               </Typography>
               <Typography component='h4' variant='h4' sx={{ fontWeight: 'bold', marginBottom: 2 }}>
-                R$ 50.000
+                {formatCurrency(product.price)}
               </Typography>
-              <Chip label='Categoria' />
+              <Chip label={product.category} />
             </Box>
 
             <Box
@@ -82,7 +67,7 @@ const Product = () => {
                 Descrição
               </Typography>
               <Typography component='p' variant='body2'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas odio sem, pretium quis aliquam sed, placerat vitae lorem. Donec faucibus mollis ex, vitae aliquet risus auctor id. Phasellus sit amet mattis nunc. Mauris viverra, diam quis convallis tempor, lacus risus convallis ligula, et venenatis augue ligula vel massa.
+                {product.description}
               </Typography>
             </Box>
           </Grid>
@@ -90,18 +75,20 @@ const Product = () => {
           <Grid item xs={4}>
             <Card
               elevation={0}
-              sx={{ backgroundColor: LightTheme.palette.background.default, padding: 3, marginBottom: 3 }}
+              sx={{ backgroundColor: LightTheme.palette.background.default, padding: 1, marginBottom: 3 }}
             >
               <CardHeader
                 avatar={
-                  <Avatar>T</Avatar>
+                  <Avatar src={product.user.image}>
+                    {product.user.image || product.user.name[0]}
+                  </Avatar>
                 }
-                title='Gabriel Kanawati'
-                subheader='gabrielkanawati3@gmail.com'
+                title={product.user.name}
+                subheader={product.user.email}
               />
               <CardMedia
-                image='https://source.unsplash.com/random'
-                title='Gabriel Kanawati'
+                image={product.user.image}
+                title={product.user.name}
               />
             </Card>
 
@@ -110,10 +97,9 @@ const Product = () => {
               sx={{ padding: 3, marginBottom: 3 }}
             >
               <Typography component='h6' variant='h6'>
-                Localização
+                Localização - TO DO
               </Typography>
             </Box>
-
           </Grid>
         </Grid>
       </Container>
@@ -121,17 +107,18 @@ const Product = () => {
   )
 }
 
-function Item(props) {
-  return (
-    <Paper>
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
+export async function getServerSideProps({ query }) {
+  const { id } = query
 
-      <Button className="CheckButton">
-        Check it out!
-      </Button>
-    </Paper>
-  )
+  await dbConnect()
+
+  const product = await ProductsModel.findOne({ _id: id })
+
+  return {
+    props: {
+      product: JSON.parse(JSON.stringify(product))
+    }
+  }
 }
 
 export default Product
