@@ -15,6 +15,7 @@ import {
 
 import Link from 'next/link';
 import { AccountCircle } from '@mui/icons-material';
+import Image from 'next/image';
 
 export default function Header() {
 
@@ -29,8 +30,14 @@ export default function Header() {
       <Container maxWidth='lg'>
         <Toolbar>
           <Link href="/">
-            <a style={{ flexGrow: 1, textDecoration: 'none', color: '#fff' }}>
-              <Typography variant="h6" component="div" >
+            <a style={{ flexGrow: 1, textDecoration: 'none', color: '#fff', display: 'flex' }}>
+              <Image
+                src="/images/logo-anunx-removebg.png"
+                width={32}
+                height={32}
+                alt="Anunx"
+              />
+              <Typography variant="h6" component="div" sx={{ marginX: 1 }}>
                 Anunx
               </Typography>
             </a>

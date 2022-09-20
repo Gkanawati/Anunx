@@ -10,8 +10,13 @@ import {
 import { Search } from '@mui/icons-material';
 import TemplateDefault from '../src/templates/Default';
 import Card from '../src/components/Card';
+import dbConnect from '../src/utils/dbConnect';
+import { formatCurrency } from '../src/utils/currency';
+import ProductsModel from '../src/models/products';
+import Link from 'next/link';
+import slugify from 'slugify';
 
-const Home = () => {
+const Home = ({ products }) => {
   return (
     <TemplateDefault>
       <Container>
@@ -19,7 +24,13 @@ const Home = () => {
           <Typography component='h1' variant='h3' align='center' color='textPrimary'>
             O que deseja encontrar?
           </Typography>
-          <Paper sx={styles.searchBox}>
+          <Paper sx={{
+            paddingX: 2,
+            marginTop: 3,
+            display: 'flex',
+            justifyContent: 'center',
+            backgroundColor: '#fff',
+          }}>
             <InputBase
               placeholder='Ex: Apple MacBook Pro'
               fullWidth
@@ -29,39 +40,32 @@ const Home = () => {
             </IconButton>
           </Paper>
         </Container>
-        <Container maxWidth='lg' sx={styles.cardGrid}>
+        <Container maxWidth='lg' sx={{ paddingTop: 6 }}>
           <Typography component='h1' variant='h4' align='center' color='textPrimary' sx={{ paddingBottom: 2 }}>
             Destaques
           </Typography>
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={'https://source.unsplash.com/random'}
-                title='Produto X'
-                subtitle='R$ 60,00'
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={'https://source.unsplash.com/random'}
-                title='Produto X'
-                subtitle='R$ 60,00'
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={'https://source.unsplash.com/random'}
-                title='Produto X'
-                subtitle='R$ 60,00'
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={'https://source.unsplash.com/random'}
-                title='Produto X'
-                subtitle='R$ 60,00'
-              />
-            </Grid>
+            {
+              products.map(product => {
+                const category = slugify(product.category).toLowerCase()
+                const title = slugify(product.title).toLowerCase()
+                return (
+                  <Grid key={product._id} item xs={12} sm={6} md={4}>
+                    <Link href={`/${category}/${title}/${product._id}`} passHref>
+                      <a>
+                        <Card
+                          image={`/uploads/${product.files[0].name}`}
+                          title={product.title}
+                          subtitle={formatCurrency(product.price)}
+                        />
+                      </a>
+                    </Link>
+                  </Grid>
+                )
+              }
+
+              )
+            }
           </Grid>
         </Container>
       </Container>
@@ -69,17 +73,18 @@ const Home = () => {
   )
 }
 
-const styles = {
-  cardGrid: {
-    paddingTop: 6,
-  },
-  searchBox: {
-    paddingX: 2,
-    marginTop: 3,
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
+export async function getServerSideProps() {
+  await dbConnect()
+
+  const products = await ProductsModel.aggregate([{
+    $sample: { size: 9 }
+  }])
+
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products))
+    }
+  }
 }
 
 export default Home
