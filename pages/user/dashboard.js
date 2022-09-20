@@ -23,7 +23,7 @@ import useToast from '../../src/contexts/Toast';
 
 const Home = ({ products }) => {
 
-  const router = useRouter()
+  const route = useRouter()
   const { setToast } = useToast()
 
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
@@ -78,7 +78,7 @@ const Home = ({ products }) => {
           Meus Anúncios
         </Typography>
 
-        <Button onClick={() => router.push('/user/publish')} variant='contained' className='buttonAdd' color='primary' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
+        <Button onClick={() => route.push('/user/publish')} variant='contained' className='buttonAdd' color='primary' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
           Publicar novo anúncio
         </Button>
 
@@ -103,7 +103,7 @@ const Home = ({ products }) => {
                       subtitle={formatCurrency(product.price)}
                       actions={
                         <>
-                          <Button size="small" color="primary" onClick={() => { }}>
+                          <Button size="small" color="primary" onClick={() => route.push(`/user/edit/${product._id}`)}>
                             Editar
                           </Button>
                           <Button size="small" color="primary" onClick={() => handleOpenConfirmModal(product._id)}>
