@@ -13,7 +13,6 @@ const Card = ({ image, title, subtitle, actions }) => {
     <CardMUI sx={[{ backgroundColor: theme.palette.background.default, position: 'relative', minHeight: '345px', }, actions && { minHeight: '366px', }]}>
       <CardMedia
         image={image}
-        title="Titulo do Anuncio"
         sx={{ paddingTop: '56%', }}
       />
       <CardContent>
