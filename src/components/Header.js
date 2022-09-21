@@ -11,6 +11,7 @@ import {
   Menu,
   MenuItem,
   Divider,
+  useMediaQuery,
 } from '@mui/material'
 
 import Link from 'next/link';
@@ -18,6 +19,8 @@ import { AccountCircle } from '@mui/icons-material';
 import Image from 'next/image';
 
 export default function Header() {
+
+  const smUp = useMediaQuery((theme) => theme.breakpoints.up("sm"));
 
   const [session] = useSession()
 
@@ -42,11 +45,13 @@ export default function Header() {
               </Typography>
             </a>
           </Link>
-          <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
-            <Button color="inherit" variant="outlined">
-              Anunciar e Vender
-            </Button>
-          </Link>
+          {smUp && (
+            <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
+              <Button color="inherit" variant="outlined">
+                Anunciar e Vender
+              </Button>
+            </Link>
+          )}
           {session && (
             <IconButton color='secondary' onClick={(e) => setAnchorUserMenu(e.currentTarget)} sx={{ paddingLeft: 2 }}>
               {
