@@ -45,13 +45,13 @@ export default function Header() {
               </Typography>
             </a>
           </Link>
-          {smUp && (
+          {smUp || !smUp && !session ? (
             <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
-              <Button color="inherit" variant="outlined">
+              <Button color="inherit" variant="outlined" size='small'>
                 Anunciar e Vender
               </Button>
             </Link>
-          )}
+          ) : null}
           {session && (
             <IconButton color='secondary' onClick={(e) => setAnchorUserMenu(e.currentTarget)} sx={{ paddingLeft: 2 }}>
               {
