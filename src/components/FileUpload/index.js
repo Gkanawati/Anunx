@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Box, IconButton, Typography } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
@@ -11,46 +12,43 @@ import {
 } from './fileUpload.styles';
 import { theme } from '../../../src/themes';
 import useToast from '../../../src/contexts/Toast';
-import { useState } from 'react';
 
 const FileUpload = ({ files, errors, touched, setFieldValue }) => {
 
-  const { setToast } = useToast()
-  const [repeated, setRepeated] = useState(false);
+  const { setToast } = useToast();
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFile) => {
       const newFiles = acceptedFile.map(file => {
-        setRepeated(false);
-        if (files.length) {
-          files.forEach(fileOfArray => {
-            if (fileOfArray.name == file.name) {
-              setToast({
-                open: true,
-                severity: 'error',
-                text: 'Não é possível adicionar imagens duplicadas!'
-              })
-              setRepeated(true)
-            }
-          })
-        }
-        if (!repeated) {
-          return (
-            Object.assign(file, {
-              preview: URL.createObjectURL(file)
-            })
-          )
-        }
+        return Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
       })
-
       setFieldValue('files', [
         ...files,
         ...newFiles
       ])
+
+      console.log('FILES: ' + files)
+      console.log('NEW FILES: ' + newFiles)
+
+      files.map(file => {
+        newFiles.forEach(newFile => {
+          if (newFile.name == file.name) {
+            setToast({
+              open: true,
+              severity: 'error',
+              text: 'Não é possível adicionar imagens duplicadas!'
+            })
+
+            const filteredArray = files.filter((item, index) => files.indexOf(item) == index)
+            setFieldValue('files', filteredArray)
+          }
+        })
+      })
     }
   })
-
 
   const handleRemoveFile = (fileName) => {
     const newFiles = files.filter(item => item.name !== fileName)
