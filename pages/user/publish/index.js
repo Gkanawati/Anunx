@@ -68,7 +68,6 @@ const Publish = ({ userId, image }) => {
         formData.append(field, values[field])
       }
     }
-
     axios.post('/api/products/add', formData)
       .then(handleSuccess)
       .catch(error => handleError(error))
@@ -104,6 +103,7 @@ const Publish = ({ userId, image }) => {
             <form onSubmit={handleSubmit}>
               <Input type='hidden' name='userId' value={values.userId} />
               <Input type='hidden' name='image' value={values.image} />
+              <Input type='hidden' name='publishDate' value={values.publishDate} />
 
               <Container sx={{ paddingBottom: 3 }}>
                 <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
@@ -186,6 +186,7 @@ const Publish = ({ userId, image }) => {
                         name='description'
                         multiline
                         rows={7}
+                        value={values.description}
                         onChange={handleChange}
                       />
                       <FormHelperText>
@@ -268,6 +269,77 @@ const Publish = ({ userId, image }) => {
                         {errors.phone && touched.phone && errors.phone}
                       </FormHelperText>
                     </FormControl>
+
+                  </Box>
+                </Box>
+              </Container>
+
+              <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                  <Box sx={{ paddingY: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Localização
+                    </Typography>
+
+                    <FormControl error={errors.locationCity && touched.locationCity} fullWidth sx={{ marginBottom: 2 }}>
+                      <InputLabel size='small'>Cidade</InputLabel>
+                      <OutlinedInput
+                        name='locationCity'
+                        onChange={handleChange}
+                        value={values.locationCity}
+                        label="Cidade"
+                        size='small'
+                        placeholder='Ex: Valinhos'
+                      />
+                      <FormHelperText>
+                        {errors.locationCity && touched.locationCity && errors.locationCity}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <Box sx={{ minWidth: 120, paddingBottom: 3 }}>
+
+                      <FormControl error={errors.locationState && touched.locationState} fullWidth>
+                        <InputLabel size='small'>Estado</InputLabel>
+                        <Select
+                          name='locationState'
+                          value={values.locationState}
+                          label="Estado"
+                          onChange={handleChange}
+                          size='small'
+                        >
+                          <MenuItem value='AC'>Acre - AC</MenuItem>
+                          <MenuItem value='AL'>Alagoas - AL</MenuItem>
+                          <MenuItem value='AP'>Amapá - AP</MenuItem>
+                          <MenuItem value='AM'>Amazonas - AM</MenuItem>
+                          <MenuItem value='BA'>Bahia - BA</MenuItem>
+                          <MenuItem value='CE'>Ceará - CE</MenuItem>
+                          <MenuItem value='DF'>Distrito Federal - DF</MenuItem>
+                          <MenuItem value='ES'>Espirito Santo - ES</MenuItem>
+                          <MenuItem value='GO'>Goiás - GO</MenuItem>
+                          <MenuItem value='MA'>Maranhão - MA</MenuItem>
+                          <MenuItem value='MS'>Mato Grosso do Sul - MS</MenuItem>
+                          <MenuItem value='MT'>Mato Grosso - MT</MenuItem>
+                          <MenuItem value='MG'>Minas Gerais - MG</MenuItem>
+                          <MenuItem value='PA'>Pará - PA</MenuItem>
+                          <MenuItem value='PB'>Paraíba - PB</MenuItem>
+                          <MenuItem value='PR'>Paraná - PR</MenuItem>
+                          <MenuItem value='PE'>Pernambuco - PE</MenuItem>
+                          <MenuItem value='PI'>Piauí - PI</MenuItem>
+                          <MenuItem value='RJ'>Rio de Janeiro - RJ</MenuItem>
+                          <MenuItem value='RN'>Rio Grande do Norte - RN</MenuItem>
+                          <MenuItem value='RS'>Rio Grande do Sul - RS</MenuItem>
+                          <MenuItem value='RO'>Rondônia - RO</MenuItem>
+                          <MenuItem value='RR'>Roraima - RR</MenuItem>
+                          <MenuItem value='SC'>Santa Catarina - SC</MenuItem>
+                          <MenuItem value='SP'>São Paulo - SP</MenuItem>
+                          <MenuItem value='SE'>Sergipe - SE</MenuItem>
+                          <MenuItem value='TO'>Tocantins - TO</MenuItem>
+                        </Select>
+                        <FormHelperText>
+                          {errors.locationState && touched.locationState && errors.locationState}
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
 
                   </Box>
                 </Box>

@@ -58,6 +58,9 @@ const post = async (req, res) => {
       phone,
       userId,
       image,
+      locationCity,
+      locationState,
+      publishDate,
     } = fields
 
     const product = new ProductsModel({
@@ -73,6 +76,9 @@ const post = async (req, res) => {
         image,
       },
       files: filesToSave,
+      locationCity,
+      locationState,
+      publishDate,
     })
 
     const register = await product.save()
@@ -140,6 +146,9 @@ const edit = async (req, res) => {
       phone,
       userId,
       image,
+      locationCity,
+      locationState,
+      publishDate,
     } = fields
 
     const product = new ProductsModel({
@@ -155,6 +164,9 @@ const edit = async (req, res) => {
         image,
       },
       files: filesToSave,
+      locationCity,
+      locationState,
+      publishDate,
     })
 
     const register = await product.update()

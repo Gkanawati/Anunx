@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Avatar,
   Box,
@@ -21,7 +22,52 @@ import { formatCurrency } from '../../../src/utils/currency';
 const Product = ({ product }) => {
 
   const smDown = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-  const mdUp = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  const [month, setMonth] = useState('')
+
+  const day = product.publishDate.substring(0, 2);
+  const monthNumber = product.publishDate.substring(3, 5);
+  const year = product.publishDate.substring(6, 10);
+
+  useEffect(() => {
+    switch (monthNumber) {
+      case '01':
+        setMonth('Janeiro')
+        break;
+      case '02':
+        setMonth('Fevereiro')
+        break;
+      case '03':
+        setMonth('Janeiro')
+        break;
+      case '04':
+        setMonth('Janeiro')
+        break;
+      case '05':
+        setMonth('Janeiro')
+        break;
+      case '06':
+        setMonth('Janeiro')
+        break;
+      case '07':
+        setMonth('Janeiro')
+        break;
+      case '08':
+        setMonth('Janeiro')
+        break;
+      case '09':
+        setMonth('Setembro')
+        break;
+      case '10':
+        setMonth('Janeiro')
+        break;
+      case '11':
+        setMonth('Janeiro')
+        break;
+      case '12':
+        setMonth('Janeiro')
+        break;
+    }
+  }, [monthNumber])
 
   return (
     <TemplateDefault>
@@ -52,7 +98,7 @@ const Product = ({ product }) => {
               textAlign='left'
             >
               <Typography component='span' variant='caption'>
-                Publicado 16 junho de 2021 - TO DO
+                Publicado em {day} de {month} de {year}
               </Typography>
               <Typography component='h4' variant='h4' sx={{ marginY: 2 }}>
                 {product.title}
@@ -102,7 +148,10 @@ const Product = ({ product }) => {
               sx={{ padding: 3, marginBottom: 3 }}
             >
               <Typography component='h6' variant='h6'>
-                Localização - TO DO
+                Localização:
+              </Typography>
+              <Typography component='h5' variant='subtitle1'>
+                {product.locationCity} - {product.locationState}
               </Typography>
             </Box>
           </Grid>
