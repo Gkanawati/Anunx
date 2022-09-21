@@ -1,17 +1,10 @@
-import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import slugify from 'slugify';
 import {
   Container,
   Grid,
-  IconButton,
-  InputBase,
-  Paper,
   Typography,
-  Button
 } from '@mui/material';
-import { Search } from '@mui/icons-material';
 import TemplateDefault from '../src/templates/Default';
 import Card from '../src/components/Card';
 import dbConnect from '../src/utils/dbConnect';

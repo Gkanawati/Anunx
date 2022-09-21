@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/client';
+import slugify from 'slugify';
 import {
   Button,
   Container,
@@ -20,6 +21,7 @@ import TemplateDefault from '../../src/templates/Default'
 import Card from '../../src/components/Card';
 import { formatCurrency } from '../../src/utils/currency';
 import useToast from '../../src/contexts/Toast';
+import Link from 'next/link';
 
 const Home = ({ products }) => {
 
@@ -93,25 +95,30 @@ const Home = ({ products }) => {
               if (removedProducts.includes(product._id)) {
                 return null
               }
-
+              const category = slugify(product.category).toLowerCase()
+              const title = slugify(product.title).toLowerCase()
               return (
                 (
                   <Grid key={product._id} item xs={12} sm={6} md={4}>
-                    <Card
-                      image={`/uploads/${product.files[0].name}`}
-                      title={product.title}
-                      subtitle={formatCurrency(product.price)}
-                      actions={
-                        <>
-                          <Button size="small" color="primary" onClick={() => route.push(`/user/edit/${product._id}`)}>
-                            Editar
-                          </Button>
-                          <Button size="small" color="primary" onClick={() => handleOpenConfirmModal(product._id)}>
-                            Remover
-                          </Button>
-                        </>
-                      }
-                    />
+                    <Link href={`/${category}/${title}/${product._id}`} passHref>
+                      <a>
+                        <Card
+                          image={`/uploads/${product.files[0].name}`}
+                          title={product.title}
+                          subtitle={formatCurrency(product.price)}
+                          actions={
+                            <>
+                              <Button size="small" color="primary" onClick={() => route.push(`/user/edit/${product._id}`)}>
+                                Editar
+                              </Button>
+                              <Button size="small" color="primary" onClick={() => handleOpenConfirmModal(product._id)}>
+                                Remover
+                              </Button>
+                            </>
+                          }
+                        />
+                      </a>
+                    </Link>
                   </Grid>
                 ))
             })}
