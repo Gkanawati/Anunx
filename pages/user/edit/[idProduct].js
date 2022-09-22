@@ -25,12 +25,12 @@ import useToast from '../../../src/contexts/Toast';
 import { getSession } from 'next-auth/client';
 import ProductsModel from '../../../src/models/products';
 
-const Edit = ({ userId, image, queryId, product }) => {
-
-  console.log(product.title)
+const Edit = ({ userId, image, product }) => {
 
   const router = useRouter()
   const { setToast } = useToast()
+
+  console.log(product._id)
 
   const localFiles = []
 
@@ -50,20 +50,10 @@ const Edit = ({ userId, image, queryId, product }) => {
     email: product.user.email,
     phone: product.user.phone,
     files: localFiles,
+    locationCity: product.locationCity,
+    locationState: product.locationState,
+    publishDate: product.publishDate,
   }
-  console.log(localFiles);
-
-  [
-    {
-      "path": "corolla2.jpg",
-      "preview": "blob:http://localhost:3000/6f48131a-ae3d-474f-beaa-ed960da89faf"
-    },
-    {
-      "path": "corolla1.jpg",
-      "preview": "blob:http://localhost:3000/a699fafa-27e1-4d12-bcde-13276f6e7486"
-    }
-  ]
-
   const formValues = {
     ...initialValues,
   }
@@ -74,7 +64,7 @@ const Edit = ({ userId, image, queryId, product }) => {
   const handleSuccess = () => {
     setToast({
       open: true,
-      text: 'Anúncio cadastrado com sucesso',
+      text: 'Anúncio editado com sucesso',
       severity: 'success',
     })
 
@@ -104,7 +94,11 @@ const Edit = ({ userId, image, queryId, product }) => {
       }
     }
 
-    axios.put('/api/products/add', formData)
+    axios.put('/api/products/update', {
+      data: {
+        id: product._id
+      }
+    })
       .then(handleSuccess)
       .catch(error => handleError(error))
   }
@@ -139,6 +133,7 @@ const Edit = ({ userId, image, queryId, product }) => {
             <form onSubmit={handleSubmit}>
               <Input type='hidden' name='userId' value={values.userId} />
               <Input type='hidden' name='image' value={values.image} />
+              <Input type='hidden' name='publishDate' value={values.publishDate} />
 
               <Container sx={{ paddingBottom: 3 }}>
                 <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
@@ -244,6 +239,7 @@ const Edit = ({ userId, image, queryId, product }) => {
                         name='price'
                         label="Valor"
                         value={values.price}
+                        // value={price.toLocaleString('pt-br', {minimumFractionDigits: 2})}
                         onChange={handleChange}
                         startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
                       />
@@ -310,6 +306,77 @@ const Edit = ({ userId, image, queryId, product }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
+                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                  <Box sx={{ paddingY: 3 }}>
+                    <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
+                      Localização
+                    </Typography>
+
+                    <FormControl error={errors.locationCity && touched.locationCity} fullWidth sx={{ marginBottom: 2 }}>
+                      <InputLabel size='small'>Cidade</InputLabel>
+                      <OutlinedInput
+                        name='locationCity'
+                        onChange={handleChange}
+                        value={values.locationCity}
+                        label="Cidade"
+                        size='small'
+                        placeholder='Ex: Valinhos'
+                      />
+                      <FormHelperText>
+                        {errors.locationCity && touched.locationCity && errors.locationCity}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <Box sx={{ minWidth: 120, paddingBottom: 3 }}>
+
+                      <FormControl error={errors.locationState && touched.locationState} fullWidth>
+                        <InputLabel size='small'>Estado</InputLabel>
+                        <Select
+                          name='locationState'
+                          value={values.locationState}
+                          label="Estado"
+                          onChange={handleChange}
+                          size='small'
+                        >
+                          <MenuItem value='AC'>Acre - AC</MenuItem>
+                          <MenuItem value='AL'>Alagoas - AL</MenuItem>
+                          <MenuItem value='AP'>Amapá - AP</MenuItem>
+                          <MenuItem value='AM'>Amazonas - AM</MenuItem>
+                          <MenuItem value='BA'>Bahia - BA</MenuItem>
+                          <MenuItem value='CE'>Ceará - CE</MenuItem>
+                          <MenuItem value='DF'>Distrito Federal - DF</MenuItem>
+                          <MenuItem value='ES'>Espirito Santo - ES</MenuItem>
+                          <MenuItem value='GO'>Goiás - GO</MenuItem>
+                          <MenuItem value='MA'>Maranhão - MA</MenuItem>
+                          <MenuItem value='MS'>Mato Grosso do Sul - MS</MenuItem>
+                          <MenuItem value='MT'>Mato Grosso - MT</MenuItem>
+                          <MenuItem value='MG'>Minas Gerais - MG</MenuItem>
+                          <MenuItem value='PA'>Pará - PA</MenuItem>
+                          <MenuItem value='PB'>Paraíba - PB</MenuItem>
+                          <MenuItem value='PR'>Paraná - PR</MenuItem>
+                          <MenuItem value='PE'>Pernambuco - PE</MenuItem>
+                          <MenuItem value='PI'>Piauí - PI</MenuItem>
+                          <MenuItem value='RJ'>Rio de Janeiro - RJ</MenuItem>
+                          <MenuItem value='RN'>Rio Grande do Norte - RN</MenuItem>
+                          <MenuItem value='RS'>Rio Grande do Sul - RS</MenuItem>
+                          <MenuItem value='RO'>Rondônia - RO</MenuItem>
+                          <MenuItem value='RR'>Roraima - RR</MenuItem>
+                          <MenuItem value='SC'>Santa Catarina - SC</MenuItem>
+                          <MenuItem value='SP'>São Paulo - SP</MenuItem>
+                          <MenuItem value='SE'>Sergipe - SE</MenuItem>
+                          <MenuItem value='TO'>Tocantins - TO</MenuItem>
+                        </Select>
+                        <FormHelperText>
+                          {errors.locationState && touched.locationState && errors.locationState}
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
+
+                  </Box>
+                </Box>
+              </Container>
+
+              <Container sx={{ paddingBottom: 3 }}>
                 <Box textAlign='right'>
                   {isSubmitting
                     ? <CircularProgress size={30} sx={{ marginRight: 2 }} />
@@ -338,13 +405,11 @@ export async function getServerSideProps({ req, query }) {
   const { idProduct } = query
 
   const product = await ProductsModel.findOne({ _id: idProduct })
-  console.log(product)
 
   return {
     props: {
       userId,
       image: user.image,
-      queryId: idProduct,
       product: JSON.parse(JSON.stringify(product)),
     }
   }

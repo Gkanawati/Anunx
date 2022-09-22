@@ -92,8 +92,10 @@ const post = async (req, res) => {
   })
 }
 
-const edit = async (req, res) => {
+const update = async (req, res) => {
   await dbConnect()
+
+  const id = req.query
 
   const form = new formidable.IncomingForm({
     multiples: true,
@@ -169,9 +171,14 @@ const edit = async (req, res) => {
       publishDate,
     })
 
-    const register = await product.update()
 
-    if (register) {
+    // const product = await ProductsModel.findOneAndUpdate({ _id: id }, { title: 'Teste Editando' });
+
+    // const product = await ProductsModel.findById({ _id: id })
+
+    const updated = await product.save()
+
+    if (updated) {
       res.status(201).json({ success: true })
     }
     else {
@@ -195,4 +202,4 @@ const remove = async (req, res) => {
   }
 }
 
-export { post, edit, remove }
+export { post, update, remove }

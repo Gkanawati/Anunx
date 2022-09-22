@@ -48,7 +48,7 @@ export default function Header() {
           {smUp || !smUp && !session ? (
             <Link href={session ? '/user/publish' : '/auth/signin'} passHref>
               <Button color="inherit" variant="outlined" size='small'>
-                Anunciar e Vender
+                {session ? 'Anunciar e Vender' : 'Entrar'}
               </Button>
             </Link>
           ) : null}

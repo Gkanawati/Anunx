@@ -100,25 +100,24 @@ const Home = ({ products }) => {
               return (
                 (
                   <Grid key={product._id} item xs={12} sm={6} md={4}>
-                    <Link href={`/${category}/${title}/${product._id}`} passHref>
-                      <a>
-                        <Card
-                          image={`/uploads/${product.files[0].name}`}
-                          title={product.title}
-                          subtitle={formatCurrency(product.price)}
-                          actions={
-                            <>
-                              <Button size="small" color="primary" onClick={() => route.push(`/user/edit/${product._id}`)}>
-                                Editar
-                              </Button>
-                              <Button size="small" color="primary" onClick={() => handleOpenConfirmModal(product._id)}>
-                                Remover
-                              </Button>
-                            </>
-                          }
-                        />
-                      </a>
-                    </Link>
+                    <Card
+                      image={`/uploads/${product.files[0].name}`}
+                      title={product.title}
+                      subtitle={formatCurrency(product.price)}
+                      actions={
+                        <>
+                          <Button size="small" color="primary" onClick={() => route.push(`/${category}/${title}/${product._id}`)}>
+                            Ver Anuncio
+                          </Button>
+                          <Button size="small" color="primary" onClick={() => route.push(`/user/edit/${product._id}`)}>
+                            Editar
+                          </Button>
+                          <Button size="small" color="primary" onClick={() => handleOpenConfirmModal(product._id)}>
+                            Remover
+                          </Button>
+                        </>
+                      }
+                    />
                   </Grid>
                 ))
             })}

@@ -37,34 +37,34 @@ const Product = ({ product }) => {
         setMonth('Fevereiro')
         break;
       case '03':
-        setMonth('Janeiro')
+        setMonth('Março')
         break;
       case '04':
-        setMonth('Janeiro')
+        setMonth('Abril')
         break;
       case '05':
-        setMonth('Janeiro')
+        setMonth('Maio')
         break;
       case '06':
-        setMonth('Janeiro')
+        setMonth('Junho')
         break;
       case '07':
-        setMonth('Janeiro')
+        setMonth('Julho')
         break;
       case '08':
-        setMonth('Janeiro')
+        setMonth('Agosto')
         break;
       case '09':
         setMonth('Setembro')
         break;
       case '10':
-        setMonth('Janeiro')
+        setMonth('Outubro')
         break;
       case '11':
-        setMonth('Janeiro')
+        setMonth('Novembro')
         break;
       case '12':
-        setMonth('Janeiro')
+        setMonth('Dezembro')
         break;
     }
   }, [monthNumber])
