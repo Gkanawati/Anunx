@@ -29,10 +29,10 @@ const Footer = () => {
       <Grid container spacing={3}>
         <Grid item xs={6} sm={3}>
           <Box sx={{ color: theme.palette.primary }} textAlign='center'>
-            <Link href="#">
+            <Link href="/">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>
-                  Ajuda e Contato
+                  Home
                 </Typography>
               </a>
             </Link>
@@ -51,10 +51,10 @@ const Footer = () => {
         </Grid>
         <Grid item xs={6} sm={3}>
           <Box sx={{ color: theme.palette.primary }} textAlign='center'>
-            <Link href="#">
+            <Link href="/user/dashboard">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>
-                  Ajuda e Contato
+                  Meus Anúncios
                 </Typography>
               </a>
             </Link>
@@ -62,10 +62,10 @@ const Footer = () => {
         </Grid>
         <Grid item xs={6} sm={3}>
           <Box sx={{ color: theme.palette.primary }} textAlign='center'>
-            <Link href="#">
+            <Link href="/user/publish">
               <a>
                 <Typography color='textSecondary' variant='subtitle1'>
-                  Ajuda e Contato
+                  Anunciar e Vender
                 </Typography>
               </a>
             </Link>
