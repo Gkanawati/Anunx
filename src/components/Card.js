@@ -16,7 +16,7 @@ const Card = ({ image, title, subtitle, actions }) => {
         sx={{ paddingTop: '56%', }}
       />
       <CardContent>
-        <Typography variant='h5' component='h2' gutterBottom>
+        <Typography variant='h5' component='h2' gutterBottom sx={{ fontSize: '1.3rem', display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }} >
           {title}
         </Typography>
         <Typography variant='span' component='h3' sx={!actions && { fontWeight: '700', fontSize: 20, position: 'absolute', bottom: 25 }}>
