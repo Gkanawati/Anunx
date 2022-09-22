@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/client';
 import {
   AppBar,
@@ -12,21 +14,31 @@ import {
   MenuItem,
   Divider,
   useMediaQuery,
+  ToggleButtonGroup,
+  ToggleButton,
+  useTheme
 } from '@mui/material'
 
-import Link from 'next/link';
-import { AccountCircle } from '@mui/icons-material';
-import Image from 'next/image';
+import { AccountCircle, LightMode, DarkModeOutlined } from '@mui/icons-material';
 
 export default function Header() {
-
   const smUp = useMediaQuery((theme) => theme.breakpoints.up("sm"));
-
   const [session] = useSession()
-
   const [anchorUserMenu, setAnchorUserMenu] = useState(false);
-
   const openUserMenu = Boolean(anchorUserMenu)
+
+  const theme = useTheme()
+  const [mode, setMode] = useState(theme)
+
+  const handleToggleTheme = () => {
+    if (theme.palette.mode == 'light') {
+      theme.palette.mode = 'dark'
+      console.log(theme)
+    }
+    else {
+      theme.palette.mode = 'light'
+    }
+  }
 
   return (
     <AppBar position="static" elevation={3}>
@@ -80,6 +92,19 @@ export default function Header() {
             <Link href="/user/publish">
               <MenuItem>Publicar novo anúncio</MenuItem>
             </Link>
+            <Divider />
+            <MenuItem sx={{ flexDirection: 'column' }}>
+              <Typography sx={{ alignSelf: 'start' }} gutterBottom>Modo</Typography>
+              <ToggleButtonGroup
+                exclusive
+                value={mode}
+                onChange={() => handleToggleTheme()}
+              >
+                <ToggleButton value="light"><LightMode /> Claro</ToggleButton>
+                <ToggleButton value="dark"><DarkModeOutlined /> Escuro</ToggleButton>
+              </ToggleButtonGroup>
+
+            </MenuItem>
             <Divider />
             <MenuItem onClick={() => signOut({
               callbackUrl: '/'

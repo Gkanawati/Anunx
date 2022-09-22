@@ -10,7 +10,7 @@ import {
   Thumb,
   ThumbsContainer
 } from './fileUpload.styles';
-import { theme } from '../../../src/themes';
+import { LightTheme as theme } from '../../../src/themes';
 import useToast from '../../../src/contexts/Toast';
 
 const FileUpload = ({ files, errors, touched, setFieldValue }) => {
@@ -56,7 +56,7 @@ const FileUpload = ({ files, errors, touched, setFieldValue }) => {
   }
 
   return (
-    <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingY: 3 }}>
+    <Box sx={{ paddingX: 3, paddingY: 3 }}>
       <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
         Imagens
       </Typography>

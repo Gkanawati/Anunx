@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import Carousel from 'react-material-ui-carousel'
 
-import { theme } from '../../../src/themes';
+import { LightTheme as theme } from '../../../src/themes';
 import TemplateDefault from '../../../src/templates/Default';
 import ProductsModel from '../../../src/models/products';
 import dbConnect from '../../../src/utils/dbConnect';
@@ -75,7 +75,6 @@ const Product = ({ product }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={8} lg={8}>
             <Box
-              bgcolor={theme.palette.background.default}
               sx={smDown ? { padding: 1, marginBottom: 3 } : { padding: 3, marginBottom: 3 }}
             >
               <Carousel autoPlay={false} animation='slide' navButtonsAlwaysVisible indicators={false}>
@@ -93,7 +92,6 @@ const Product = ({ product }) => {
             </Box>
 
             <Box
-              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
               textAlign='left'
             >
@@ -110,7 +108,6 @@ const Product = ({ product }) => {
             </Box>
 
             <Box
-              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
               textAlign='left'
             >
@@ -126,7 +123,7 @@ const Product = ({ product }) => {
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <Card
               elevation={0}
-              sx={{ backgroundColor: theme.palette.background.default, padding: 1, marginBottom: 3 }}
+              sx={{ padding: 1, marginBottom: 3 }}
             >
               <CardHeader
                 avatar={
@@ -144,7 +141,6 @@ const Product = ({ product }) => {
             </Card>
 
             <Box
-              bgcolor={theme.palette.background.default}
               sx={{ padding: 3, marginBottom: 3 }}
             >
               <Typography component='h6' variant='h6'>

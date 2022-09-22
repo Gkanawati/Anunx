@@ -12,7 +12,7 @@ import {
 import { Search } from '@mui/icons-material';
 
 import TemplateDefault from '../../src/templates/Default';
-import { theme } from '../../src/themes';
+import { LightTheme as theme } from '../../src/themes';
 import Card from '../../src/components/Card';
 import ProductsModel from '../../src/models/products';
 import { formatCurrency } from '../../src/utils/currency';
@@ -27,7 +27,6 @@ const List = ({ products, query }) => {
         <InputSearch />
 
         <Box
-          bgcolor={theme.palette.background.default}
           sx={{ padding: 3 }}
         >
           <Typography component='h6' variant='h6'>

@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { theme } from '../../../src/themes';
+import { LightTheme as theme } from '../../../src/themes';
 
 export const CardSendImage = styled('Box')({
   width: 200,
@@ -10,7 +10,6 @@ export const CardSendImage = styled('Box')({
   justifyContent: 'center',
   border: theme.spacing(0.3),
   borderStyle: 'dashed',
-  backgroundColor: theme.palette.background.paper,
   cursor: 'pointer',
 });
 

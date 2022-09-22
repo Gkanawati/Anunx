@@ -6,11 +6,11 @@ import {
   Button,
   Typography
 } from '@mui/material';
-import { theme } from '../themes';
+import { LightTheme as theme } from '../themes';
 
 const Card = ({ image, title, subtitle, actions }) => {
   return (
-    <CardMUI sx={[{ backgroundColor: theme.palette.background.default, position: 'relative', minHeight: '345px', }, actions && { minHeight: '366px', }]}>
+    <CardMUI sx={[{ position: 'relative', minHeight: '345px', }, actions && { minHeight: '366px', }]}>
       <CardMedia
         image={image}
         sx={{ paddingTop: '56%', }}

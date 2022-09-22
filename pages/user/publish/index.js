@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { theme } from '../../../src/themes';
+import { LightTheme as theme } from '../../../src/themes';
 import { initialValues, validationSchema } from './formValues';
 import FileUpload from '../../../src/components/FileUpload';
 import useToast from '../../../src/contexts/Toast';
@@ -106,7 +106,7 @@ const Publish = ({ userId, image }) => {
               <Input type='hidden' name='publishDate' value={values.publishDate} />
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
+                <Box sx={{ paddingX: 3, paddingTop: 3 }}>
 
                   <Box sx={{ paddingBottom: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
@@ -173,7 +173,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                <Box sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Descrição
@@ -198,7 +198,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                <Box sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Preço
@@ -221,7 +221,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                <Box sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Dados de Contato
@@ -275,7 +275,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3 }}>
+                <Box sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Localização

@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { theme } from '../../../src/themes';
 import { initialValues, validationSchema } from './formValues';
 import useToast from '../../../src/contexts/Toast';
 import { useRouter } from 'next/router';
@@ -53,7 +52,6 @@ const Signup = () => {
 
         <Container>
           <Box
-            bgcolor={theme.palette.background.default}
             sx={{ padding: 3, }}
           >
             <Formik

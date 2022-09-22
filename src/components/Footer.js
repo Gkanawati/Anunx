@@ -6,7 +6,7 @@ import {
   useMediaQuery
 } from "@mui/material"
 import Link from "next/link"
-import { theme } from "../themes"
+import { LightTheme as theme } from "../themes"
 
 const Footer = () => {
 
