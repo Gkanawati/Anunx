@@ -19,6 +19,9 @@ const post = async (req, res) => {
     }
     const { files } = data
 
+    console.log("FILES ")
+    console.log(files)
+
     const filesToRename = files instanceof Array
       ? files
       : [files]
@@ -63,6 +66,9 @@ const post = async (req, res) => {
       publishDate,
     } = fields
 
+    console.log('FIELDS')
+    console.log(fields)
+
     const product = new ProductsModel({
       title,
       category,
@@ -97,23 +103,52 @@ const update = async (req, res) => {
 
   const { id } = req.query
 
-  const { title, category, locationCity } = req.body
+  const form = new formidable.IncomingForm({
+    multiples: true,
+    uploadDir: 'public/uploads',
+    keepExtensions: true,
+  })
 
-  const product = await ProductsModel.findById({ _id: id })
+  form.parse(req, async (error, fields, data) => {
+    if (error) {
+      return res.status(500).json({ success: false })
+    }
 
-  product.title = title
-  product.category = category
-  product.locationCity = locationCity
+    const {
+      title,
+      category,
+      description,
+      price,
+      name,
+      email,
+      phone,
+      locationCity,
+      locationState,
+      publishDate,
+    } = fields
 
-  const register = await product.save()
+    const product = await ProductsModel.findById(id)
 
-  if (register) {
-    res.status(201).json({ success: true })
-  }
-  else {
-    res.status(500).json({ success: false })
-  }
-  // const updated = await ProductsModel.updateOne({ _id: id }, { title, category, locationCity })
+    product.title = title
+    product.category = category
+    product.description = description
+    product.price = price
+    product.name = name
+    product.email = email
+    product.phone = phone
+    product.locationCity = locationCity
+    product.locationState = locationState
+
+
+    const updated = product.save()
+
+    if (updated) {
+      res.status(200).json({ success: true })
+    }
+    else {
+      res.status(500).json({ success: false })
+    }
+  })
 }
 
 const remove = async (req, res) => {
@@ -132,3 +167,21 @@ const remove = async (req, res) => {
 }
 
 export { post, update, remove }
+
+/* const { title, category, locationCity } = req.body
+
+const product = await ProductsModel.findById({ _id: id })
+
+product.title = title
+product.category = category
+product.locationCity = locationCity
+
+const register = await product.save()
+
+if (register) {
+  res.status(201).json({ success: true })
+}
+else {
+  res.status(500).json({ success: false })
+}
+const updated = await ProductsModel.updateOne({ _id: id }, { title, category, locationCity }) */

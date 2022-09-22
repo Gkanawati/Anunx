@@ -92,6 +92,8 @@ const Edit = ({ userId, image, product }) => {
       }
     }
 
+    console.log(formData)
+
     axios.put(`/api/products/update/${product._id}`, formData)
       .then(handleSuccess)
       .catch(error => handleError(error))
