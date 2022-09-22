@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'O campo "nome" é obrigatório.']
+    required: [true, 'O campo "nome" eh obrigatorio.']
   },
   email: {
     type: String,
-    required: [true, 'O campo "email" é obrigatório.']
+    required: [true, 'O campo "email" eh obrigatorio.']
   },
   password: {
     type: String,
-    required: [true, 'O campo "senha" é obrigatório.']
+    required: [true, 'O campo "senha" eh obrigatorio.']
   },
 })
 
