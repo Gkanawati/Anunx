@@ -30,8 +30,6 @@ const Edit = ({ userId, image, product }) => {
   const router = useRouter()
   const { setToast } = useToast()
 
-  console.log(product._id)
-
   const localFiles = []
 
   product.files.map(file => {
@@ -52,7 +50,7 @@ const Edit = ({ userId, image, product }) => {
     files: localFiles,
     locationCity: product.locationCity,
     locationState: product.locationState,
-    publishDate: product.publishDate,
+    publishDate: product.publishDate || '22/09/2022',
   }
   const formValues = {
     ...initialValues,
@@ -94,11 +92,7 @@ const Edit = ({ userId, image, product }) => {
       }
     }
 
-    axios.put('/api/products/update', {
-      data: {
-        id: product._id
-      }
-    })
+    axios.put(`/api/products/update/${product._id}`, formData)
       .then(handleSuccess)
       .catch(error => handleError(error))
   }
@@ -134,6 +128,7 @@ const Edit = ({ userId, image, product }) => {
               <Input type='hidden' name='userId' value={values.userId} />
               <Input type='hidden' name='image' value={values.image} />
               <Input type='hidden' name='publishDate' value={values.publishDate} />
+              <Input type='hidden' name='productId' value={product._id} />
 
               <Container sx={{ paddingBottom: 3 }}>
                 <Box bgcolor={theme.palette.background.default} sx={{ paddingX: 3, paddingTop: 3 }}>
