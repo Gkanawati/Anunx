@@ -23,7 +23,7 @@ const Footer = () => {
         paddingTop: 3,
         paddingBottom: 3
       }, {
-        borderTop: `1px solid ${theme.palette.divider}`,
+        borderTop: '1px solid #ddd',
         marginTop: 'auto',
       }]}
     >

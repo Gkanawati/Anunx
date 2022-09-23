@@ -46,7 +46,7 @@ export const Mask = styled('Box')({
 });
 
 export const MainImage = styled('Box')({
-  backgroundColor: theme.palette.secondary.greenLight,
+  backgroundColor: theme.palette.primary,
   paddingTop: 2,
   paddingBottom: 2,
   paddingLeft: 4,

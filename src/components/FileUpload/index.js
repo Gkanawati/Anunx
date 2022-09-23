@@ -1,5 +1,5 @@
 import { useDropzone } from 'react-dropzone';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Paper, Typography } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
 
 import {
@@ -51,7 +51,7 @@ const FileUpload = ({ files, errors, touched, setFieldValue }) => {
   }
 
   return (
-    <Box sx={{ paddingX: 3, paddingY: 3, zIndex: -1 }}>
+    <Box component={Paper} elevation={0} sx={{ paddingX: 3, paddingY: 3, zIndex: -1 }}>
       <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
         Imagens
       </Typography>

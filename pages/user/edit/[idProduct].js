@@ -15,6 +15,7 @@ import {
   FormHelperText,
   Input,
   CircularProgress,
+  Paper,
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
@@ -130,8 +131,7 @@ const Edit = ({ userId, image, product }) => {
               <Input type='hidden' name='productId' value={product._id} />
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3, paddingTop: 3 }}>
-
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3, paddingTop: 3 }}>
                   <Box sx={{ paddingBottom: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Título do Anúncio
@@ -183,13 +183,11 @@ const Edit = ({ userId, image, product }) => {
                       </FormHelperText>
                     </FormControl>
                   </Box>
-
                 </Box>
               </Container>
 
-
               <Container sx={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Box bgcolor='rgba(0, 0, 0, .9)' sx={{ textAlign: 'center', borderRadius: 1, position: 'absolute', left: '2.2%', width: '95%', height: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+                <Box bgcolor='rgba(0, 0, 0, .8)' sx={{ textAlign: 'center', borderRadius: 1, position: 'absolute', left: '2.2%', width: '95.7%', height: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
                   <Typography color='#fff' component='h6' gutterBottom variant='h6'>
                     Não é possível editar as fotos do seu anúncio
                   </Typography>
@@ -208,7 +206,7 @@ const Edit = ({ userId, image, product }) => {
               </Container>
 
               <Container sx={{ paddingY: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Descrição
@@ -233,7 +231,7 @@ const Edit = ({ userId, image, product }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Preço
@@ -257,7 +255,7 @@ const Edit = ({ userId, image, product }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Dados de Contato
@@ -311,7 +309,7 @@ const Edit = ({ userId, image, product }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Localização

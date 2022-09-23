@@ -10,7 +10,7 @@ export const CardSendImage = styled('Box')({
   justifyContent: 'center',
   border: theme.spacing(0.3),
   borderStyle: 'dashed',
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.background,
   cursor: 'pointer',
 });
 
@@ -47,7 +47,7 @@ export const Mask = styled('Box')({
 });
 
 export const MainImage = styled('Box')({
-  backgroundColor: theme.palette.secondary.greenLight,
+  backgroundColor: theme.palette.background,
   paddingTop: 2,
   paddingBottom: 2,
   paddingLeft: 4,

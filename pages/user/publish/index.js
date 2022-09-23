@@ -15,6 +15,7 @@ import {
   FormHelperText,
   Input,
   CircularProgress,
+  Paper,
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
@@ -105,8 +106,7 @@ const Publish = ({ userId, image }) => {
               <Input type='hidden' name='publishDate' value={values.publishDate} />
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3, paddingTop: 3 }}>
-
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3, paddingTop: 3 }}>
                   <Box sx={{ paddingBottom: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Título do Anúncio
@@ -172,7 +172,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Descrição
@@ -197,7 +197,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Preço
@@ -220,7 +220,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Dados de Contato
@@ -274,7 +274,7 @@ const Publish = ({ userId, image }) => {
               </Container>
 
               <Container sx={{ paddingBottom: 3 }}>
-                <Box sx={{ paddingX: 3 }}>
+                <Box component={Paper} elevation={0} sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
                       Localização

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/client';
 import slugify from 'slugify';
 import {
+  Box,
   Button,
   Container,
   Dialog,
@@ -12,7 +13,8 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 
 import dbConnect from '../../src/utils/dbConnect';
@@ -21,12 +23,12 @@ import TemplateDefault from '../../src/templates/Default'
 import Card from '../../src/components/Card';
 import { formatCurrency } from '../../src/utils/currency';
 import useToast from '../../src/contexts/Toast';
-import Link from 'next/link';
 
 const Home = ({ products }) => {
 
   const route = useRouter()
   const { setToast } = useToast()
+  const theme = useTheme()
 
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [productId, setProductId] = useState('');
@@ -76,11 +78,11 @@ const Home = ({ products }) => {
   return (
     <TemplateDefault>
       <Container maxWidth='lg'>
-        <Typography component='h1' variant='h2' align='center' color='primary'>
+        <Typography component='h1' variant='h2' align='center'>
           Meus Anúncios
         </Typography>
 
-        <Button onClick={() => route.push('/user/publish')} variant='contained' className='buttonAdd' color='primary' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
+        <Button onClick={() => route.push('/user/publish')} variant='contained' className='buttonAdd' sx={{ marginY: 4, marginX: 'auto', display: 'block' }}>
           Publicar novo anúncio
         </Button>
 
@@ -105,17 +107,17 @@ const Home = ({ products }) => {
                       title={product.title}
                       subtitle={formatCurrency(product.price)}
                       actions={
-                        <>
-                          <Button size="small" color="primary" onClick={() => route.push(`/${category}/${title}/${product._id}`)}>
+                        <Box>
+                          <Button size="small" onClick={() => route.push(`/${category}/${title}/${product._id}`)}>
                             Ver Anuncio
                           </Button>
-                          <Button size="small" color="primary" onClick={() => route.push(`/user/edit/${product._id}`)}>
+                          <Button size="small" onClick={() => route.push(`/user/edit/${product._id}`)}>
                             Editar
                           </Button>
-                          <Button size="small" color="primary" onClick={() => handleOpenConfirmModal(product._id)}>
+                          <Button size="small" onClick={() => handleOpenConfirmModal(product._id)}>
                             Remover
                           </Button>
-                        </>
+                        </Box>
                       }
                     />
                   </Grid>

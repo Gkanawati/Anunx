@@ -26,7 +26,6 @@ const InputSearch = () => {
       marginY: 3,
       display: 'flex',
       justifyContent: 'center',
-      backgroundColor: '#fff',
     }}>
       <InputBase
         onChange={e => setSearch(e.target.value)}

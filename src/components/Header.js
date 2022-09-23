@@ -17,7 +17,6 @@ import {
   useTheme,
   Box
 } from '@mui/material'
-
 import { AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 
 import { ColorModeContext } from '../../src/contexts/ColorModeContext'
@@ -32,7 +31,7 @@ export default function Header() {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <AppBar position="static" elevation={3}>
+    <AppBar position="static" elevation={3} sx={{ backgroundColor: theme.palette.primary }}>
       <Container maxWidth='lg'>
         <Toolbar>
           <Link href="/">
@@ -62,7 +61,7 @@ export default function Header() {
                   ? <Avatar src={session.user.image} />
                   : <AccountCircle />
               }
-              <Typography variant='subtitle2' sx={{ paddingLeft: 1 }}>
+              <Typography variant='subtitle2' color='#fff' sx={{ paddingLeft: 1 }}>
                 {session.user.name}
               </Typography>
             </IconButton>
