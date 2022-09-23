@@ -18,7 +18,6 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { LightTheme as theme } from '../../../src/themes';
 import { initialValues, validationSchema } from './formValues';
 import FileUpload from '../../../src/components/FileUpload';
 import useToast from '../../../src/contexts/Toast';
@@ -373,7 +372,7 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
-      userId,
+      userId: userId ? userId : user.email,
       image: user.image,
     }
   }

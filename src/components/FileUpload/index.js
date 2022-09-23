@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Box, IconButton, Typography } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
@@ -10,7 +9,6 @@ import {
   Thumb,
   ThumbsContainer
 } from './fileUpload.styles';
-import { LightTheme as theme } from '../../../src/themes';
 import useToast from '../../../src/contexts/Toast';
 
 const FileUpload = ({ files, errors, touched, setFieldValue }) => {
@@ -20,18 +18,15 @@ const FileUpload = ({ files, errors, touched, setFieldValue }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFile) => {
-      const newFiles = acceptedFile.map(file => {
-        return Object.assign(file, {
+      const newFiles = acceptedFile.map(file =>
+        Object.assign(file, {
           preview: URL.createObjectURL(file)
         })
-      })
+      )
       setFieldValue('files', [
         ...files,
         ...newFiles
       ])
-
-      console.log('FILES: ' + files)
-      console.log('NEW FILES: ' + newFiles)
 
       files.map(file => {
         newFiles.forEach(newFile => {
@@ -51,12 +46,12 @@ const FileUpload = ({ files, errors, touched, setFieldValue }) => {
   })
 
   const handleRemoveFile = (fileName) => {
-    const newFiles = files.filter(item => item.name !== fileName)
+    const newFiles = files.filter(item => (item.path || item.name) !== fileName)
     setFieldValue('files', newFiles)
   }
 
   return (
-    <Box sx={{ paddingX: 3, paddingY: 3 }}>
+    <Box sx={{ paddingX: 3, paddingY: 3, zIndex: -1 }}>
       <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>
         Imagens
       </Typography>
@@ -91,7 +86,7 @@ const FileUpload = ({ files, errors, touched, setFieldValue }) => {
               </MainImage>
             }
             <Mask className='mask'>
-              <IconButton color='secondary' onClick={() => handleRemoveFile(file.name)}>
+              <IconButton color='secondary' onClick={() => handleRemoveFile(file.path)}>
                 <DeleteForever />
               </IconButton>
             </Mask>

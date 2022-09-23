@@ -18,9 +18,8 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { LightTheme as theme } from '../../../src/themes';
 import { validationSchema } from './formValues';
-import FileUpload from '../../../src/components/FileUpload';
+import FileUploadOnlyView from '../../../src/components/FileUploadOnlyView';
 import useToast from '../../../src/contexts/Toast';
 import { getSession } from 'next-auth/client';
 import ProductsModel from '../../../src/models/products';
@@ -91,8 +90,6 @@ const Edit = ({ userId, image, product }) => {
         formData.append(field, values[field])
       }
     }
-
-    console.log(formData)
 
     axios.put(`/api/products/update/${product._id}`, formData)
       .then(handleSuccess)
@@ -190,16 +187,27 @@ const Edit = ({ userId, image, product }) => {
                 </Box>
               </Container>
 
-              <Container sx={{ paddingBottom: 3 }}>
-                <FileUpload
-                  setFieldValue={setFieldValue}
-                  files={values.files}
-                  errors={errors.files}
-                  touched={touched.files}
-                />
+
+              <Container sx={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <Box bgcolor='rgba(0, 0, 0, .9)' sx={{ textAlign: 'center', borderRadius: 1, position: 'absolute', left: '2.2%', width: '95%', height: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+                  <Typography color='#fff' component='h6' gutterBottom variant='h6'>
+                    Não é possível editar as fotos do seu anúncio
+                  </Typography>
+                  <Typography color='#fff' component='h6' gutterBottom variant='body2'>
+                    Caso seja necessário, crie um novo anúncio
+                  </Typography>
+                </Box>
+                <Box sx={{ opacity: 0.2, cursor: 'default' }}>
+                  <FileUploadOnlyView
+                    setFieldValue={setFieldValue}
+                    files={values.files}
+                    errors={errors.files}
+                    touched={touched.files}
+                  />
+                </Box>
               </Container>
 
-              <Container sx={{ paddingBottom: 3 }}>
+              <Container sx={{ paddingY: 3 }}>
                 <Box sx={{ paddingX: 3 }}>
                   <Box sx={{ paddingY: 3 }}>
                     <Typography component='h6' gutterBottom variant='h6' color='textPrimary'>

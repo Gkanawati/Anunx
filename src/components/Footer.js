@@ -24,6 +24,7 @@ const Footer = () => {
         paddingBottom: 3
       }, {
         borderTop: `1px solid ${theme.palette.divider}`,
+        marginTop: 'auto',
       }]}
     >
       <Grid container spacing={3}>

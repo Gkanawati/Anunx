@@ -19,9 +19,6 @@ const post = async (req, res) => {
     }
     const { files } = data
 
-    console.log("FILES ")
-    console.log(files)
-
     const filesToRename = files instanceof Array
       ? files
       : [files]
@@ -65,9 +62,6 @@ const post = async (req, res) => {
       locationState,
       publishDate,
     } = fields
-
-    console.log('FIELDS')
-    console.log(fields)
 
     const product = new ProductsModel({
       title,
@@ -124,7 +118,6 @@ const update = async (req, res) => {
       phone,
       locationCity,
       locationState,
-      publishDate,
     } = fields
 
     const product = await ProductsModel.findById(id)
@@ -138,7 +131,6 @@ const update = async (req, res) => {
     product.phone = phone
     product.locationCity = locationCity
     product.locationState = locationState
-
 
     const updated = product.save()
 

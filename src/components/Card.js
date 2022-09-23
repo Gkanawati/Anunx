@@ -6,7 +6,6 @@ import {
   Button,
   Typography
 } from '@mui/material';
-import { LightTheme as theme } from '../themes';
 
 const Card = ({ image, title, subtitle, actions }) => {
   return (
