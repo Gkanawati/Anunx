@@ -159,7 +159,7 @@ export async function getServerSideProps({ req }) {
   const session = await getSession({ req })
   await dbConnect()
 
-  const products = await ProductsModel.find({ 'user.id': session.userId })
+  const products = await ProductsModel.find({ 'user.id': session.userId }).sort({ publishDate: -1 })
 
   return {
     props: {
