@@ -8,7 +8,7 @@ import '../src/TradutorYup';
 import '../src/styles/globals.css';
 import CheckAuth from '../src/components/CheckAuth';
 import { ToastProvider } from '../src/contexts/Toast';
-import { AppThemeProvider } from '../src/contexts/ThemeContext';
+import { ColorModeProvider } from '../src/contexts/ColorModeContext'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -23,7 +23,7 @@ export default function MyApp(props) {
         <title>Anunx</title>
       </Head>
       <Provider session={pageProps.session}>
-        <AppThemeProvider>
+        <ColorModeProvider>
           <ToastProvider>
             <CssBaseline />
             {
@@ -33,7 +33,7 @@ export default function MyApp(props) {
             }
 
           </ToastProvider>
-        </AppThemeProvider>
+        </ColorModeProvider>
       </Provider>
     </CacheProvider>
   );

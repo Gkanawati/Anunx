@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/client';
@@ -14,12 +14,13 @@ import {
   MenuItem,
   Divider,
   useMediaQuery,
-  ToggleButtonGroup,
-  ToggleButton,
-  useTheme
+  useTheme,
+  Box
 } from '@mui/material'
 
-import { AccountCircle, LightMode, DarkModeOutlined } from '@mui/icons-material';
+import { AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
+
+import { ColorModeContext } from '../../src/contexts/ColorModeContext'
 
 export default function Header() {
   const smUp = useMediaQuery((theme) => theme.breakpoints.up("sm"));
@@ -28,17 +29,7 @@ export default function Header() {
   const openUserMenu = Boolean(anchorUserMenu)
 
   const theme = useTheme()
-  const [mode, setMode] = useState(theme)
-
-  const handleToggleTheme = () => {
-    if (theme.palette.mode == 'light') {
-      theme.palette.mode = 'dark'
-      console.log(theme)
-    }
-    else {
-      theme.palette.mode = 'light'
-    }
-  }
+  const colorMode = useContext(ColorModeContext);
 
   return (
     <AppBar position="static" elevation={3}>
@@ -71,11 +62,16 @@ export default function Header() {
                   ? <Avatar src={session.user.image} />
                   : <AccountCircle />
               }
-              <Typography variant='subtitle2' color='secondary' sx={{ paddingLeft: 1 }}>
+              <Typography variant='subtitle2' sx={{ paddingLeft: 1 }}>
                 {session.user.name}
               </Typography>
             </IconButton>
           )}
+          <Box>
+            <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+              {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
+          </Box>
 
           <Menu
             anchorEl={anchorUserMenu}
@@ -92,19 +88,6 @@ export default function Header() {
             <Link href="/user/publish">
               <MenuItem>Publicar novo anúncio</MenuItem>
             </Link>
-            <Divider />
-            <MenuItem sx={{ flexDirection: 'column' }}>
-              <Typography sx={{ alignSelf: 'start' }} gutterBottom>Modo</Typography>
-              <ToggleButtonGroup
-                exclusive
-                value={mode}
-                onChange={() => handleToggleTheme()}
-              >
-                <ToggleButton value="light"><LightMode /> Claro</ToggleButton>
-                <ToggleButton value="dark"><DarkModeOutlined /> Escuro</ToggleButton>
-              </ToggleButtonGroup>
-
-            </MenuItem>
             <Divider />
             <MenuItem onClick={() => signOut({
               callbackUrl: '/'
