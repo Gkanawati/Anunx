@@ -22,8 +22,8 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Anunx</title>
       </Head>
-      <Provider session={pageProps.session}>
-        <ColorModeProvider>
+      <ColorModeProvider>
+        <Provider session={pageProps.session}>
           <ToastProvider>
             <CssBaseline />
             {
@@ -33,8 +33,8 @@ export default function MyApp(props) {
             }
 
           </ToastProvider>
-        </ColorModeProvider>
-      </Provider>
+        </Provider>
+      </ColorModeProvider>
     </CacheProvider>
   );
 }
