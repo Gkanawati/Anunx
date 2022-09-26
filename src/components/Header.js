@@ -20,6 +20,7 @@ import {
 import { AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 
 import { ColorModeContext } from '../../src/contexts/ColorModeContext'
+import { lightBlue } from '@mui/material/colors';
 
 export default function Header() {
   const smUp = useMediaQuery((theme) => theme.breakpoints.up("sm"));
@@ -31,7 +32,7 @@ export default function Header() {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <AppBar position="static" elevation={3} sx={{ backgroundColor: theme.palette.primary }}>
+    <AppBar position="static" elevation={3} sx={{ backgroundColor: lightBlue[700] }}>
       <Container maxWidth='lg'>
         <Toolbar>
           <Link href="/">
