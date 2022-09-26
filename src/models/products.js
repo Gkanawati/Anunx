@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
     required: [true, 'O campo "descricao" eh obrigatorio'],
   },
   price: {
-    type: Number,
+    type: String,
     required: [true, 'O campo "preco" eh obrigatorio'],
   },
   user: {

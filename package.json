@@ -22,10 +22,10 @@
     "next": "12.2.5",
     "next-auth": "3.27.1",
     "next-connect": "^0.13.0",
-    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",
+    "react-input-mask": "^2.0.4",
     "react-material-ui-carousel": "^3.4.2",
     "slugify": "^1.6.5",
     "yup": "^0.32.11"

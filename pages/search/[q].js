@@ -4,18 +4,12 @@ import {
   Box,
   Container,
   Grid,
-  IconButton,
-  InputBase,
-  Paper,
   Typography,
 } from '@mui/material';
-import { Search } from '@mui/icons-material';
 
 import TemplateDefault from '../../src/templates/Default';
-import { LightTheme as theme } from '../../src/themes';
 import Card from '../../src/components/Card';
 import ProductsModel from '../../src/models/products';
-import { formatCurrency } from '../../src/utils/currency';
 import InputSearch from '../../src/components/InputSearch';
 
 
@@ -56,7 +50,7 @@ const List = ({ products, query }) => {
                         <Card
                           image={`/uploads/${product.files[0].name}`}
                           title={product.title}
-                          subtitle={formatCurrency(product.price)}
+                          subtitle={'R$ ' + product.price}
                         />
                       </a>
                     </Link>

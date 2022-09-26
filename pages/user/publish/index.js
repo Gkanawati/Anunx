@@ -23,6 +23,8 @@ import { initialValues, validationSchema } from './formValues';
 import FileUpload from '../../../src/components/FileUpload';
 import useToast from '../../../src/contexts/Toast';
 import { getSession } from 'next-auth/client';
+import { currencyMask } from '../../../src/utils/currency';
+import ReactInputMask from 'react-input-mask';
 
 const Publish = ({ userId, image }) => {
 
@@ -98,7 +100,6 @@ const Publish = ({ userId, image }) => {
           setFieldValue,
           isSubmitting,
         }) => {
-
           return (
             <form onSubmit={handleSubmit}>
               <Input type='hidden' name='userId' value={values.userId} />
@@ -203,12 +204,12 @@ const Publish = ({ userId, image }) => {
                       Preço
                     </Typography>
                     <FormControl fullWidth error={errors.price && touched.price}>
-                      <InputLabel>Valor</InputLabel>
+                      <InputLabel>Preço</InputLabel>
                       <OutlinedInput
-                        name='price'
                         label="Valor"
+                        name='price'
                         value={values.price}
-                        onChange={handleChange}
+                        onChange={e => handleChange(currencyMask(e))}
                         startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
                       />
                       <FormHelperText>
@@ -256,19 +257,21 @@ const Publish = ({ userId, image }) => {
 
                     <FormControl error={errors.phone && touched.phone} fullWidth sx={{ marginBottom: 2 }}>
                       <InputLabel size='small'>Telefone</InputLabel>
-                      <OutlinedInput
+                      <ReactInputMask
+                        mask="(99) 99999-9999"
                         name='phone'
-                        onChange={handleChange}
                         value={values.phone}
-                        label="Telefone"
-                        type="number"
-                        size='small'
-                      />
+                        onChange={e => {
+                          const value = e.target.value || '';
+                          setFieldValue('phone', value);
+                        }}
+                      >
+                        {() => <OutlinedInput label="Telefone" size='small' />}
+                      </ReactInputMask>
                       <FormHelperText>
                         {errors.phone && touched.phone && errors.phone}
                       </FormHelperText>
                     </FormControl>
-
                   </Box>
                 </Box>
               </Container>
@@ -296,7 +299,6 @@ const Publish = ({ userId, image }) => {
                     </FormControl>
 
                     <Box sx={{ minWidth: 120, paddingBottom: 3 }}>
-
                       <FormControl error={errors.locationState && touched.locationState} fullWidth>
                         <InputLabel size='small'>Estado</InputLabel>
                         <Select

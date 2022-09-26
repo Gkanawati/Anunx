@@ -21,7 +21,6 @@ import dbConnect from '../../src/utils/dbConnect';
 import ProductsModel from '../../src/models/products';
 import TemplateDefault from '../../src/templates/Default'
 import Card from '../../src/components/Card';
-import { formatCurrency } from '../../src/utils/currency';
 import useToast from '../../src/contexts/Toast';
 
 const Home = ({ products }) => {
@@ -105,7 +104,7 @@ const Home = ({ products }) => {
                     <Card
                       image={`/uploads/${product.files[0].name}`}
                       title={product.title}
-                      subtitle={formatCurrency(product.price)}
+                      subtitle={'R$ ' + product.price}
                       actions={
                         <Box>
                           <Button size="small" onClick={() => route.push(`/${category}/${title}/${product._id}`)}>

@@ -24,6 +24,8 @@ import FileUploadOnlyView from '../../../src/components/FileUploadOnlyView';
 import useToast from '../../../src/contexts/Toast';
 import { getSession } from 'next-auth/client';
 import ProductsModel from '../../../src/models/products';
+import { currencyMask } from '../../../src/utils/currency';
+import ReactInputMask from 'react-input-mask';
 
 const Edit = ({ userId, image, product }) => {
 
@@ -242,8 +244,7 @@ const Edit = ({ userId, image, product }) => {
                         name='price'
                         label="Valor"
                         value={values.price}
-                        // value={price.toLocaleString('pt-br', {minimumFractionDigits: 2})}
-                        onChange={handleChange}
+                        onChange={e => handleChange(currencyMask(e))}
                         startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
                       />
                       <FormHelperText>
@@ -291,14 +292,17 @@ const Edit = ({ userId, image, product }) => {
 
                     <FormControl error={errors.phone && touched.phone} fullWidth sx={{ marginBottom: 2 }}>
                       <InputLabel size='small'>Telefone</InputLabel>
-                      <OutlinedInput
+                      <ReactInputMask
+                        mask="(99) 99999-9999"
                         name='phone'
-                        onChange={handleChange}
                         value={values.phone}
-                        label="Telefone"
-                        type="number"
-                        size='small'
-                      />
+                        onChange={e => {
+                          const value = e.target.value || '';
+                          setFieldValue('phone', value);
+                        }}
+                      >
+                        {() => <OutlinedInput label="Telefone" size='small' />}
+                      </ReactInputMask>
                       <FormHelperText>
                         {errors.phone && touched.phone && errors.phone}
                       </FormHelperText>

@@ -17,7 +17,6 @@ import Carousel from 'react-material-ui-carousel'
 import TemplateDefault from '../../../src/templates/Default';
 import ProductsModel from '../../../src/models/products';
 import dbConnect from '../../../src/utils/dbConnect';
-import { formatCurrency } from '../../../src/utils/currency';
 
 const Product = ({ product }) => {
 
@@ -106,7 +105,7 @@ const Product = ({ product }) => {
                 {product.title}
               </Typography>
               <Typography component='h4' variant='h4' sx={{ fontWeight: 'bold', marginBottom: 2 }}>
-                {formatCurrency(product.price)}
+                {'R$ ' + product.price}
               </Typography>
               <Chip label={product.category} />
             </Box>
@@ -128,6 +127,7 @@ const Product = ({ product }) => {
 
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <Card
+              elevation={0}
               sx={{ padding: 1, marginBottom: 3 }}
             >
               <CardHeader

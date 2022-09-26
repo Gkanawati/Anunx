@@ -8,7 +8,6 @@ import {
 import TemplateDefault from '../src/templates/Default';
 import Card from '../src/components/Card';
 import dbConnect from '../src/utils/dbConnect';
-import { formatCurrency } from '../src/utils/currency';
 import ProductsModel from '../src/models/products';
 import InputSearch from '../src/components/InputSearch';
 
@@ -38,7 +37,7 @@ const Home = ({ products }) => {
                         <Card
                           image={`/uploads/${product.files[0].name}`}
                           title={product.title}
-                          subtitle={formatCurrency(product.price)}
+                          subtitle={'R$ ' + product.price}
                         />
                       </a>
                     </Link>
