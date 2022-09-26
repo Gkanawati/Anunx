@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { Formik } from 'formik';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signIn, useSession } from 'next-auth/client';
 import {
@@ -18,7 +19,7 @@ import {
 
 import TemplateDefault from '../../../src/templates/Default';
 import { initialValues, validationSchema } from './formValues';
-import Image from 'next/image';
+
 
 const Signin = ({ APP_URL }) => {
 
@@ -127,6 +128,13 @@ const Signin = ({ APP_URL }) => {
                           </Button>
                         )
                       }
+                      <Link href='./signup' passHref>
+                        <a>
+                          <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
+                            Crie sua conta com email
+                          </Typography>
+                        </a>
+                      </Link>
 
                       <Box sx={{
                         display: 'flex',
@@ -163,6 +171,7 @@ const Signin = ({ APP_URL }) => {
                           Entrar com Google
                         </Button>
                       </Box>
+
                     </form>
                   )
                 }

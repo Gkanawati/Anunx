@@ -1,4 +1,6 @@
 import axios from 'axios';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Formik } from 'formik';
 import {
   Container,
@@ -15,7 +17,6 @@ import {
 import TemplateDefault from '../../../src/templates/Default';
 import { initialValues, validationSchema } from './formValues';
 import useToast from '../../../src/contexts/Toast';
-import { useRouter } from 'next/router';
 
 const Signup = () => {
 
@@ -144,6 +145,13 @@ const Signup = () => {
                           </Button>
                         )
                       }
+                      <Link href='./signin' passHref>
+                        <a>
+                          <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
+                            Já possuo uma conta.
+                          </Typography>
+                        </a>
+                      </Link>
                     </form>
                   )
                 }
