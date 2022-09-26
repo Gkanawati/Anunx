@@ -3,13 +3,15 @@ import {
   Container,
   Grid,
   Typography,
-  useMediaQuery
+  useMediaQuery,
+  useTheme
 } from "@mui/material"
 import Link from "next/link"
 import { LightTheme as theme } from "../themes"
+import Copyright from "./Copyright";
 
 const Footer = () => {
-
+  const theme = useTheme()
   const smUp = useMediaQuery((theme) => theme.breakpoints.up("sm"));
 
   return (
@@ -73,6 +75,39 @@ const Footer = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <Box align="center" sx={{ mt: 3, mb: 1 }}>
+        <Typography
+          variant="h6"
+          component={Link}
+          noLinkStyle
+          href="/"
+          color="inherit"
+          gutterBottom
+          sx={{ textDecoration: 'none', '&:hover': { opacity: [0.9, 0.8, 0.7], } }}
+        >
+          Anunx
+        </Typography>
+      </Box>
+
+      <Typography
+        variant="subtitle1"
+        align="center"
+        color="text.secondary"
+        component="p"
+      >
+        Feito com ❤️ por {' '}
+        <Link
+          color="inherit"
+          rel="noopener noreferrer"
+          href="https://github.com/Gkanawati"
+          target="_blank"
+          sx={{ textDecoration: 'none', color: '#f98180', '&:hover': { opacity: [0.9, 0.8, 0.7] } }}
+        >
+          Gabriel Kanawati
+        </Link>.
+      </Typography>
+      <Copyright />
     </Container>
   )
 }
