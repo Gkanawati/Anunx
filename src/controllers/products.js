@@ -128,9 +128,9 @@ const update = async (req, res) => {
     product.category = category
     product.description = description
     product.price = price
-    product.name = name
-    product.email = email
-    product.phone = phone
+    product.user.name = name
+    product.user.email = email
+    product.user.phone = phone
     product.locationCity = locationCity
     product.locationState = locationState
 
