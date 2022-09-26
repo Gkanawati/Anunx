@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import ReactInputMask from 'react-input-mask';
 import {
   Typography,
   Box,
@@ -19,13 +20,12 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { validationSchema } from './formValues';
+import { validationSchema } from '../../../src/utils/EditFormValues';
 import FileUploadOnlyView from '../../../src/components/FileUploadOnlyView';
 import useToast from '../../../src/contexts/Toast';
 import { getSession } from 'next-auth/client';
 import ProductsModel from '../../../src/models/products';
 import { currencyMask } from '../../../src/utils/currency';
-import ReactInputMask from 'react-input-mask';
 
 const Edit = ({ userId, image, product }) => {
 

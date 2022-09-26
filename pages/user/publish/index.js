@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
+import ReactInputMask from 'react-input-mask';
+import { getSession } from 'next-auth/client';
 import {
   Typography,
   Box,
@@ -19,12 +21,10 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { initialValues, validationSchema } from './formValues';
+import { initialValues, validationSchema } from '../../../src/utils/PublishFormValues';
 import FileUpload from '../../../src/components/FileUpload';
 import useToast from '../../../src/contexts/Toast';
-import { getSession } from 'next-auth/client';
 import { currencyMask } from '../../../src/utils/currency';
-import ReactInputMask from 'react-input-mask';
 
 const Publish = ({ userId, image }) => {
 

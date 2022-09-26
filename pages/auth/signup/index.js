@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { initialValues, validationSchema } from './formValues';
+import { initialValues, validationSchema } from '../../../src/utils/SignUpFormValues';
 import useToast from '../../../src/contexts/Toast';
 
 const Signup = () => {

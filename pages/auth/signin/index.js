@@ -18,8 +18,7 @@ import {
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
-import { initialValues, validationSchema } from './formValues';
-
+import { initialValues, validationSchema } from '../../../src/utils/SignInFormValues';
 
 const Signin = ({ APP_URL }) => {
 
