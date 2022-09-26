@@ -133,7 +133,7 @@ const Product = ({ product }) => {
               <CardHeader
                 avatar={
                   <Avatar src={product.user.image}>
-                    {!product.user.image && product.user.name[0]}
+                    {product.user.name[0]}
                   </Avatar>
                 }
                 title={product.user.name}

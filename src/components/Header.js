@@ -28,6 +28,8 @@ export default function Header() {
   const [anchorUserMenu, setAnchorUserMenu] = useState(false);
   const openUserMenu = Boolean(anchorUserMenu)
 
+  console.log(session)
+
   const theme = useTheme()
   const colorMode = useContext(ColorModeContext);
 
@@ -60,7 +62,7 @@ export default function Header() {
               {
                 session.user.image
                   ? <Avatar src={session.user.image} />
-                  : <AccountCircle />
+                  : <AccountCircle sx={{ color: '#ddd', width: 27, height: 27 }} />
               }
               <Typography variant='subtitle2' color='#fff' sx={{ paddingLeft: 1 }}>
                 {session.user.name}
