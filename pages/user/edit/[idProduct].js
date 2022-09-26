@@ -413,9 +413,18 @@ export async function getServerSideProps({ req, query }) {
 
   const product = await ProductsModel.findOne({ _id: idProduct })
 
+  if (userId) {
+    return {
+      props: {
+        userId,
+        image: user.image,
+        product: JSON.parse(JSON.stringify(product)),
+      }
+    }
+  }
   return {
     props: {
-      userId,
+      userId: user.email,
       image: user.image,
       product: JSON.parse(JSON.stringify(product)),
     }
