@@ -63,8 +63,6 @@ const post = async (req, res) => {
       publishDate,
     } = fields
 
-    console.log(fields)
-
     const product = new ProductsModel({
       title,
       category,

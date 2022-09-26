@@ -28,8 +28,6 @@ export default function Header() {
   const [anchorUserMenu, setAnchorUserMenu] = useState(false);
   const openUserMenu = Boolean(anchorUserMenu)
 
-  console.log(session)
-
   const theme = useTheme()
   const colorMode = useContext(ColorModeContext);
 

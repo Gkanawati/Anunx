@@ -26,7 +26,6 @@ const Signup = () => {
     const response = await axios.post('/api/users', values)
 
     if (response.data.success) {
-      console.log('Dados cadastrados com sucesso')
       setToast({
         open: true,
         severity: 'success',

@@ -15,8 +15,6 @@ export default NextAuth({
 
         const user = res.data
 
-        console.log('ID:' + user.id)
-
         if (user) {
           return user
         } else {
