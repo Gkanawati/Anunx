@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signIn, useSession } from 'next-auth/client';
+import { signIn } from 'next-auth/client';
 import {
   Container,
   Box,
@@ -14,7 +14,8 @@ import {
   Button,
   CircularProgress,
   Alert,
-  useTheme
+  useTheme,
+  useMediaQuery
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/Default';
@@ -23,8 +24,9 @@ import { initialValues, validationSchema } from '../../../src/utils/SignInFormVa
 const Signin = ({ APP_URL }) => {
 
   const router = useRouter()
-  const [session] = useSession()
   const theme = useTheme()
+
+  const smDown = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const handleFormSubmit = async values => {
     signIn('credentials', {
@@ -44,7 +46,7 @@ const Signin = ({ APP_URL }) => {
     <TemplateDefault>
       <Container maxWidth='sm' >
         <Container component='main' sx={{ marginBottom: 3 }}>
-          <Typography component='h1' variant='h2' align='center' color='textPrimary'>
+          <Typography component='h1' variant={smDown ? 'h4' : 'h2'} align='center' color='textPrimary'>
             Entre na sua conta
           </Typography>
         </Container>

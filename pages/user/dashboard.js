@@ -14,6 +14,7 @@ import {
   DialogTitle,
   Grid,
   Typography,
+  useMediaQuery,
   useTheme
 } from '@mui/material';
 
@@ -27,6 +28,7 @@ const Home = ({ products }) => {
 
   const route = useRouter()
   const { setToast } = useToast()
+  const smDown = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [productId, setProductId] = useState('');
@@ -76,7 +78,7 @@ const Home = ({ products }) => {
   return (
     <TemplateDefault>
       <Container maxWidth='lg'>
-        <Typography component='h1' variant='h2' align='center'>
+        <Typography component='h1' variant={smDown ? 'h3' : 'h2'} align='center'>
           Meus Anúncios
         </Typography>
 
