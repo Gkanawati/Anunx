@@ -129,7 +129,7 @@ const Signin = ({ APP_URL }) => {
                           </Button>
                         )
                       }
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <Box sx={!smDown && { display: 'flex', justifyContent: 'space-between' }}>
                         <Link href='#' passHref>
                           <a>
                             <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
