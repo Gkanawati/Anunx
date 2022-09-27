@@ -16,6 +16,7 @@
     "@mui/material": "^5.10.4",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.32.0",
     "formidable-serverless": "^1.1.1",
     "formik": "^2.2.9",
     "mongoose": "^6.6.1",

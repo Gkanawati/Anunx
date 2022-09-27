@@ -48,7 +48,7 @@ const List = ({ products, query }) => {
                     <Link href={`/${category}/${title}/${product._id}`}>
                       <a>
                         <Card
-                          image={`/uploads/${product.files[0].name}`}
+                          image={product.files[0].url}
                           title={product.title}
                           subtitle={'R$ ' + product.price}
                         />

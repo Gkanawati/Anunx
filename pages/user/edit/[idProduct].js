@@ -37,7 +37,7 @@ const Edit = ({ userId, image, product }) => {
   product.files.map(file => {
     localFiles.push({
       path: file.name,
-      preview: "/uploads/" + file.name,
+      preview: file.url,
     })
   })
 

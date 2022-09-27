@@ -4,12 +4,20 @@ import formidable from 'formidable-serverless';
 import ProductsModel from '../models/products';
 import dbConnect from '../utils/dbConnect';
 
+// Cloudinary credentials
+import cloudinary from 'cloudinary'
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY_CLOUDINARY,
+  api_secret: process.env.API_SECRET_CLOUDINARY,
+})
+
 const post = async (req, res) => {
   await dbConnect()
 
   const form = new formidable.IncomingForm({
     multiples: true,
-    uploadDir: 'public/uploads',
     keepExtensions: true,
   })
 
@@ -17,36 +25,41 @@ const post = async (req, res) => {
     if (error) {
       return res.status(500).json({ success: false })
     }
+    // Pick the files in form
     const { files } = data
 
-    const filesToRename = files instanceof Array
+    // transform files in an array
+    const filesArray = files instanceof Array
       ? files
       : [files]
 
+    let uploadedImg = []
+    const filesWrapper = []
     const filesToSave = []
 
-    filesToRename.forEach(file => {
-      const timeStamp = Date.now()
-      const randomNumber = Math.floor(Math.random() * 999999) + 1
-      const extension = path.extname(file.name)
-
-      const fileName = `${timeStamp}_${randomNumber}${extension}`
-
-      const oldPath = path.join(__dirname, `../../../../../${file.path}`)
-      const newPath = path.join(__dirname, `../../../../../${form.uploadDir}/${fileName}`)
-
-      filesToSave.push({
-        name: fileName,
-        path: newPath,
-      })
-
-      fs.rename(oldPath, newPath, (error) => {
+    for (let i = 0; i < filesArray.length; i++) {
+      uploadedImg = await cloudinary.v2.uploader.upload(filesArray[i].path, {
+        resource_type: 'image',
+        access_type: 'anonymous',
+      }, (error) => {
         if (error) {
-          console.log(error)
-          return res.status(500).json({ success: false, erro: "RENAME FILE ERROR" })
+          console.error(error)
+          return res.status(500).json({ success: false })
         }
       })
-    })
+
+      filesWrapper.push(uploadedImg)
+
+      const newFilename = filesWrapper[i].original_filename
+      const newUrl = filesWrapper[i].secure_url
+      const publicId = filesWrapper[i].public_id
+
+      filesToSave.push({
+        name: newFilename,
+        url: newUrl,
+        publicId,
+      })
+    }
 
     const {
       title,
@@ -147,6 +160,11 @@ const remove = async (req, res) => {
   await dbConnect()
 
   const id = req.body.id
+  const files = req.body.files
+
+  for (let i = 0; i < files.length; i++) {
+    cloudinary.v2.uploader.destroy(files[i].publicId)
+  }
 
   const deleted = await ProductsModel.findOneAndRemove({ _id: id })
 
@@ -159,21 +177,3 @@ const remove = async (req, res) => {
 }
 
 export { post, update, remove }
-
-/* const { title, category, locationCity } = req.body
-
-const product = await ProductsModel.findById({ _id: id })
-
-product.title = title
-product.category = category
-product.locationCity = locationCity
-
-const register = await product.save()
-
-if (register) {
-  res.status(201).json({ success: true })
-}
-else {
-  res.status(500).json({ success: false })
-}
-const updated = await ProductsModel.updateOne({ _id: id }, { title, category, locationCity }) */

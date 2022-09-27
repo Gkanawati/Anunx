@@ -84,7 +84,7 @@ const Product = ({ product }) => {
                     <Card key={file.name} sx={{ height: '100%' }}>
                       <CardMedia
                         sx={{ paddingTop: '56%' }}
-                        image={`/uploads/${file.name}`}
+                        image={file.url}
                       />
                     </Card>
                   )

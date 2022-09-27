@@ -35,7 +35,7 @@ const Home = ({ products }) => {
                     <Link href={`/${category}/${title}/${product._id}`} passHref>
                       <a>
                         <Card
-                          image={`/uploads/${product.files[0].name}`}
+                          image={product.files[0].url}
                           title={product.title}
                           subtitle={'R$ ' + product.price}
                         />

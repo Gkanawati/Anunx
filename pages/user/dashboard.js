@@ -27,15 +27,16 @@ const Home = ({ products }) => {
 
   const route = useRouter()
   const { setToast } = useToast()
-  const theme = useTheme()
 
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [productId, setProductId] = useState('');
+  const [productFiles, setProductFiles] = useState()
   const [removedProducts, setRemovedProducts] = useState([]);
 
-  const handleOpenConfirmModal = (product_id) => {
-    setOpenConfirmModal(true)
+  const handleOpenConfirmModal = (product_id, productFiles) => {
     setProductId(product_id)
+    setProductFiles(productFiles)
+    setOpenConfirmModal(true)
   };
 
   const handleClose = () => {
@@ -45,7 +46,8 @@ const Home = ({ products }) => {
   const handleConfirmRemove = () => {
     axios.delete('/api/products/delete', {
       data: {
-        id: productId
+        id: productId,
+        files: productFiles,
       }
     })
       .then(handleSuccess)
@@ -54,9 +56,7 @@ const Home = ({ products }) => {
 
   const handleSuccess = () => {
     setOpenConfirmModal(false)
-
     setRemovedProducts([...removedProducts, productId])
-
     setToast({
       open: true,
       severity: 'success',
@@ -66,7 +66,6 @@ const Home = ({ products }) => {
 
   const handleError = () => {
     setOpenConfirmModal(false)
-
     setToast({
       open: true,
       severity: 'error',
@@ -102,7 +101,7 @@ const Home = ({ products }) => {
                 (
                   <Grid key={product._id} item xs={12} sm={6} md={4}>
                     <Card
-                      image={`/uploads/${product.files[0].name}`}
+                      image={product.files[0].url}
                       title={product.title}
                       subtitle={'R$ ' + product.price}
                       actions={
@@ -113,7 +112,7 @@ const Home = ({ products }) => {
                           <Button size="small" onClick={() => route.push(`/user/edit/${product._id}`)}>
                             Editar
                           </Button>
-                          <Button size="small" onClick={() => handleOpenConfirmModal(product._id)}>
+                          <Button size="small" onClick={() => handleOpenConfirmModal(product._id, product.files)}>
                             Remover
                           </Button>
                         </Box>
