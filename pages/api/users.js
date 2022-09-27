@@ -1,7 +1,7 @@
 import nextConnect from 'next-connect'
 import { get, post } from '../../src/controllers/users'
 
-const route = nextConnect({
+const handler = nextConnect({
   onError: (err, req, res, next) => {
     console.error(err);
     res.status(500).end("Something broke!");
@@ -13,4 +13,5 @@ const route = nextConnect({
   .get(get)
   .post(post)
 
-export default route
+
+export default handler
