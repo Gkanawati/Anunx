@@ -129,13 +129,25 @@ const Signin = ({ APP_URL }) => {
                           </Button>
                         )
                       }
-                      <Link href='./signup' passHref>
-                        <a>
-                          <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
-                            Crie sua conta com email
-                          </Typography>
-                        </a>
-                      </Link>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Link href='#' passHref>
+                          <a>
+                            <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
+                              Esqueceu sua senha?
+                            </Typography>
+                          </a>
+                        </Link>
+                        <Link href='./signup' passHref >
+                          <a style={{ display: 'flex' }}>
+                            <Typography sx={{ marginTop: 1, fontSize: 15, mr: 1, cursor: 'default' }}>
+                              Não tem uma conta?
+                            </Typography>
+                            <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
+                              Cadastre-se
+                            </Typography>
+                          </a>
+                        </Link>
+                      </Box>
 
                       <Box sx={{
                         display: 'flex',

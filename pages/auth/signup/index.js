@@ -146,9 +146,12 @@ const Signup = () => {
                         )
                       }
                       <Link href='./signin' passHref>
-                        <a>
+                        <a style={{ display: 'flex' }}>
+                          <Typography sx={{ marginTop: 1, fontSize: 15, mr: 1, cursor: 'default' }}>
+                            Já possui uma conta?
+                          </Typography>
                           <Typography sx={{ marginTop: 1, textDecoration: 'underline', fontSize: 15 }}>
-                            Já possuo uma conta.
+                            Entrar
                           </Typography>
                         </a>
                       </Link>
