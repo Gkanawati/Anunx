@@ -20,7 +20,7 @@ export default function MyApp(props) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>Anunx</title>
+        <title>Anunx | Anúncios Online</title>
       </Head>
       <ColorModeProvider>
         <SessionProvider session={pageProps.session}>
