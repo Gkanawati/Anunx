@@ -105,7 +105,7 @@ const List = ({ products, query }) => {
           {
             products.length < 1
             && (
-              <Typography>Nenhum anúncio encontrado 😔</Typography>
+              <Typography align='center'>Nenhum anúncio encontrado 😔</Typography>
             )
           }
           <Grid container spacing={4}>
