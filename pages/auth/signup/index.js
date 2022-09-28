@@ -40,7 +40,7 @@ const Signup = () => {
 
   return (
     <TemplateDefault>
-      <Container maxWidth='md' >
+      <Container maxWidth='sm' >
         <Container component='main' sx={{ marginBottom: 3 }}>
           <Typography component='h1' variant='h2' align='center' color='textPrimary'>
             Crie sua conta
