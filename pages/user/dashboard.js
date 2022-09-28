@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import slugify from 'slugify';
 import {
   Box,
@@ -15,7 +15,6 @@ import {
   Grid,
   Typography,
   useMediaQuery,
-  useTheme
 } from '@mui/material';
 
 import dbConnect from '../../src/utils/dbConnect';
@@ -25,6 +24,8 @@ import Card from '../../src/components/Card';
 import useToast from '../../src/contexts/Toast';
 
 const Home = ({ products }) => {
+
+  console.log(products)
 
   const route = useRouter()
   const { setToast } = useToast()
@@ -159,7 +160,7 @@ export async function getServerSideProps({ req }) {
   const session = await getSession({ req })
   await dbConnect()
 
-  const products = await ProductsModel.find({ 'user.id': session.userId ? session.userId : session.user.email }).sort({ publishDate: -1 })
+  const products = await ProductsModel.find({ 'user.id': session.userId }).sort({ publishDate: -1 })
 
   return {
     props: {

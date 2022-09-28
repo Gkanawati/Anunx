@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { signOut, useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/react';
 import {
   AppBar,
   Typography,
@@ -24,7 +24,7 @@ import { lightBlue } from '@mui/material/colors';
 
 export default function Header() {
   const smUp = useMediaQuery((theme) => theme.breakpoints.up("sm"));
-  const [session] = useSession()
+  const { data: session } = useSession()
   const [anchorUserMenu, setAnchorUserMenu] = useState(false);
   const openUserMenu = Boolean(anchorUserMenu)
 

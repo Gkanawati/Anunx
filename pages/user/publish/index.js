@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import ReactInputMask from 'react-input-mask';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import {
   Typography,
   Box,

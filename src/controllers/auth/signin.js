@@ -2,7 +2,7 @@ import UsersModel from '../../models/users'
 import dbConnect from '../../utils/dbConnect'
 import { compare } from '../../utils/password'
 
-const post = async (req, res) => {
+export async function post(req, res) {
   const {
     email,
     password,
@@ -16,16 +16,15 @@ const post = async (req, res) => {
     return res.status(401).json({ success: false, message: 'invalid' })
   }
 
-  const passwordIsCorrect = compare(password, user.password)
-
-  if (passwordIsCorrect) {
+  const passIsCorrect = await compare(password, user.password)
+  console.log('passIsCorrect', passIsCorrect)
+  if (passIsCorrect) {
     return res.status(200).json({
       _id: user._id,
       name: user.name,
       email: user.email,
     })
   }
+
   return res.status(401).json({ success: false, message: 'invalid' })
 }
-
-export { post }

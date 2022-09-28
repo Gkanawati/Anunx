@@ -23,7 +23,7 @@ import TemplateDefault from '../../../src/templates/Default';
 import { validationSchema } from '../../../src/utils/EditFormValues';
 import FileUploadOnlyView from '../../../src/components/FileUploadOnlyView';
 import useToast from '../../../src/contexts/Toast';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import ProductsModel from '../../../src/models/products';
 import { currencyMask } from '../../../src/utils/currency';
 
@@ -415,8 +415,8 @@ export async function getServerSideProps({ req, query }) {
 
   return {
     props: {
-      userId: userId ? userId : user.email,
-      image: user.image,
+      userId: userId,
+      image: user.image ? user.image : null,
       product: JSON.parse(JSON.stringify(product)),
     }
   }

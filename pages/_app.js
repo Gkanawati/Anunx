@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { Provider } from "next-auth/client"
+import { SessionProvider } from "next-auth/react"
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
@@ -23,7 +23,7 @@ export default function MyApp(props) {
         <title>Anunx</title>
       </Head>
       <ColorModeProvider>
-        <Provider session={pageProps.session}>
+        <SessionProvider session={pageProps.session}>
           <ToastProvider>
             <CssBaseline />
             {
@@ -33,7 +33,7 @@ export default function MyApp(props) {
             }
 
           </ToastProvider>
-        </Provider>
+        </SessionProvider>
       </ColorModeProvider>
     </CacheProvider>
   );

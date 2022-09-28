@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 import {
   Container,
   Box,
