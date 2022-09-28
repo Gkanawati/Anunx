@@ -17,7 +17,7 @@ export async function post(req, res) {
   }
 
   const passIsCorrect = await compare(password, user.password)
-  console.log('passIsCorrect', passIsCorrect)
+
   if (passIsCorrect) {
     return res.status(200).json({
       _id: user._id,
