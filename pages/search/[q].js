@@ -37,6 +37,12 @@ const List = ({ products, query }) => {
                 : 'Encontrado'
             } para "{query}"
           </Typography>
+          {
+            products.length < 1
+            && (
+              <Typography>Nenhum anúncio encontrado 😔</Typography>
+            )
+          }
           <Grid container spacing={4}>
             {
               products.map(product => {
@@ -61,7 +67,7 @@ const List = ({ products, query }) => {
           </Grid>
         </Box>
       </Container>
-    </TemplateDefault>
+    </TemplateDefault >
   )
 }
 
