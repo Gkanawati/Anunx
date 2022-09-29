@@ -9,18 +9,15 @@ const get = async (req, res) => {
 }
 
 const post = async (req, res) => {
-  // pegar os dados que vem no req
   const {
     name,
     email,
     password
   } = req.body
 
-  // conectar no banco 
-  await dbConnect()
-
-  // criptografar senha
   const passwordCrypto = await crypto(password)
+
+  await dbConnect()
 
   const user = new UsersModel({
     name,
@@ -28,10 +25,8 @@ const post = async (req, res) => {
     password: passwordCrypto,
   })
 
-  // salvar os dados
   user.save()
 
-  // responder sucesso
   res.status(201).json({ success: true })
 }
 
