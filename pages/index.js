@@ -28,8 +28,8 @@ const Home = ({ products }) => {
           <Grid container spacing={4}>
             {
               products.map(product => {
-                const category = slugify(product.category).toLowerCase()
-                const title = slugify(product.title).toLowerCase()
+                const category = slugify(product.category, { lower: true })
+                const title = slugify(product.title, { lower: true })
                 return (
                   <Grid key={product._id} item xs={12} sm={6} md={4}>
                     <Link href={`/${category}/${title}/${product._id}`} passHref>

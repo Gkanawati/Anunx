@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react"
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
-import '../src/TradutorYup';
+import '../src/utils/TradutorYup';
 import '../src/styles/globals.css';
 import CheckAuth from '../src/components/CheckAuth';
 import { ToastProvider } from '../src/contexts/Toast';
@@ -22,8 +22,8 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Anunx | Anúncios Online</title>
       </Head>
-      <ColorModeProvider>
-        <SessionProvider session={pageProps.session}>
+      <SessionProvider session={pageProps.session}>
+        <ColorModeProvider>
           <ToastProvider>
             <CssBaseline />
             {
@@ -31,10 +31,9 @@ export default function MyApp(props) {
                 ? <CheckAuth Component={Component} pageProps={pageProps} />
                 : <Component {...pageProps} />
             }
-
           </ToastProvider>
-        </SessionProvider>
-      </ColorModeProvider>
+        </ColorModeProvider>
+      </SessionProvider>
     </CacheProvider>
   );
 }

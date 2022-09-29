@@ -49,88 +49,89 @@ const List = ({ products, query }) => {
       <Container maxWidth='lg'>
         <Container maxWidth='lg'>
           <InputSearch />
-        </Container>
-        <Box sx={{ padding: 2 }}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Box>
-                <Typography component='h6' variant='h6'>
-                  Anúncios
-                </Typography>
-                <Typography sx={{ textTransform: 'uppercase', display: 'block', marginBottom: 2 }} component='span' variant='subtitle2'>
-                  {products.length} {
-                    products.length > 1
-                      ? 'Anúncios'
-                      : 'Anúncio'
-                  } {
-                    products.length > 1
-                      ? 'Encontrados'
-                      : 'Encontrado'
-                  } para "{query}"
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Box sx={[{ display: 'flex', alignItems: 'center', mb: 2 }, smUp && { justifyContent: 'right', marginBottom: 0 }]}>
-                <Typography component='h6' variant='subtitle2' sx={{ fontSize: '1rem' }}>
-                  Filtrar por categoria:
-                </Typography>
-                <FormControl size='small'>
-                  <Select
-                    name='category'
-                    value={filter}
-                    onChange={(e) => handleSelectCategory(e.target.value)}
-                    size='small'
-                    sx={{ width: '60%', maxHeight: 1, ml: 2, maxWidth: 150 }}
-                    MenuProps={MenuProps}
-                  >
-                    <MenuItem value='Computadores'>Computadores</MenuItem>
-                    <MenuItem value='Eletrônicos e celulares'>Eletrônicos e celulares</MenuItem>
-                    <MenuItem value='Equipamentos e Ferramentas'>Equipamentos e Ferramentas</MenuItem>
-                    <MenuItem value='Automotivos'>Automotivos</MenuItem>
-                    <MenuItem value='Estética'>Estética</MenuItem>
-                    <MenuItem value='Bebê e Criança'>Bebê e Criança</MenuItem>
-                    <MenuItem value='Agricultura'>Agricultura</MenuItem>
-                    <MenuItem value='Animais'>Animais</MenuItem>
-                    <MenuItem value='Móveis, Casa e Jardim'>Móveis, Casa e Jardim </MenuItem>
-                    <MenuItem value='Imóveis'>Imóveis</MenuItem>
-                    <MenuItem value='Esporte'>Esporte</MenuItem>
-                    <MenuItem value='Lazer'>Lazer</MenuItem>
-                    <MenuItem value='Outros'>Outros</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </Grid>
-          </Grid>
-          {
-            products.length < 1
-            && (
-              <Typography align='center'>Nenhum anúncio encontrado 😔</Typography>
-            )
-          }
-          <Grid container spacing={4}>
-            {
-              products.map(product => {
-                const category = slugify(product.category).toLowerCase()
-                const title = slugify(product.title).toLowerCase()
 
-                return (
-                  <Grid key={product._id} item xs={12} sm={6} md={4}>
-                    <Link href={`/${category}/${title}/${product._id}`}>
-                      <a>
-                        <Card
-                          image={product.files[0].url}
-                          title={product.title}
-                          subtitle={'R$ ' + product.price}
-                        />
-                      </a>
-                    </Link>
-                  </Grid>
-                )
-              })
+          <Box sx={{ padding: 2 }}>
+            <Grid container>
+              <Grid item xs={12} sm={6}>
+                <Box>
+                  <Typography component='h6' variant='h6'>
+                    Anúncios
+                  </Typography>
+                  <Typography sx={{ textTransform: 'uppercase', display: 'block', marginBottom: 2 }} component='span' variant='subtitle2'>
+                    {products.length} {
+                      products.length > 1
+                        ? 'Anúncios'
+                        : 'Anúncio'
+                    } {
+                      products.length > 1
+                        ? 'Encontrados'
+                        : 'Encontrado'
+                    } para "{query}"
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box sx={[{ display: 'flex', alignItems: 'center', mb: 2 }, smUp && { justifyContent: 'right', marginBottom: 0 }]}>
+                  <Typography component='h6' variant='subtitle2' sx={{ fontSize: '1rem' }}>
+                    Filtrar por categoria:
+                  </Typography>
+                  <FormControl size='small'>
+                    <Select
+                      name='category'
+                      value={filter}
+                      onChange={(e) => handleSelectCategory(e.target.value)}
+                      size='small'
+                      sx={{ width: '60%', maxHeight: 1, ml: 2, maxWidth: 150 }}
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value='Computadores'>Computadores</MenuItem>
+                      <MenuItem value='Eletrônicos e celulares'>Eletrônicos e celulares</MenuItem>
+                      <MenuItem value='Equipamentos e Ferramentas'>Equipamentos e Ferramentas</MenuItem>
+                      <MenuItem value='Automotivos'>Automotivos</MenuItem>
+                      <MenuItem value='Estética'>Estética</MenuItem>
+                      <MenuItem value='Bebê e Criança'>Bebê e Criança</MenuItem>
+                      <MenuItem value='Agricultura'>Agricultura</MenuItem>
+                      <MenuItem value='Animais'>Animais</MenuItem>
+                      <MenuItem value='Móveis, Casa e Jardim'>Móveis, Casa e Jardim </MenuItem>
+                      <MenuItem value='Imóveis'>Imóveis</MenuItem>
+                      <MenuItem value='Esporte'>Esporte</MenuItem>
+                      <MenuItem value='Lazer'>Lazer</MenuItem>
+                      <MenuItem value='Outros'>Outros</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Grid>
+            </Grid>
+            {
+              products.length < 1
+              && (
+                <Typography align='center'>Nenhum anúncio encontrado 😔</Typography>
+              )
             }
-          </Grid>
-        </Box>
+            <Grid container spacing={4}>
+              {
+                products.map(product => {
+                  const category = slugify(product.category).toLowerCase()
+                  const title = slugify(product.title).toLowerCase()
+
+                  return (
+                    <Grid key={product._id} item xs={12} sm={6} md={4}>
+                      <Link href={`/${category}/${title}/${product._id}`}>
+                        <a>
+                          <Card
+                            image={product.files[0].url}
+                            title={product.title}
+                            subtitle={'R$ ' + product.price}
+                          />
+                        </a>
+                      </Link>
+                    </Grid>
+                  )
+                })
+              }
+            </Grid>
+          </Box>
+        </Container>
       </Container>
     </TemplateDefault >
   )

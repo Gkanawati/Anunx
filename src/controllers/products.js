@@ -1,10 +1,6 @@
-import fs from 'fs';
-import path from 'path';
 import formidable from 'formidable-serverless';
 import ProductsModel from '../models/products';
 import dbConnect from '../utils/dbConnect';
-
-// Cloudinary credentials
 import cloudinary from 'cloudinary'
 
 cloudinary.config({
@@ -25,7 +21,6 @@ const post = async (req, res) => {
     if (error) {
       return res.status(500).json({ success: false })
     }
-    // Pick the files in form
     const { files } = data
 
     // transform files in an array
