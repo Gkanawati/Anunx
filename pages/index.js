@@ -59,7 +59,7 @@ export async function getServerSideProps() {
   //   { $sample: { size: 6 } }
   // ])
 
-  const products = await ProductsModel.find().limit(7).sort({ publishDate: -1 })
+  const products = await ProductsModel.find().limit(9).sort({ publishDate: -1 })
 
   return {
     props: {
