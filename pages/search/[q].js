@@ -90,10 +90,8 @@ const List = ({ products, query }) => {
                       <MenuItem value='Automotivos'>Automotivos</MenuItem>
                       <MenuItem value='Estética'>Estética</MenuItem>
                       <MenuItem value='Bebê e Criança'>Bebê e Criança</MenuItem>
-                      <MenuItem value='Agricultura'>Agricultura</MenuItem>
                       <MenuItem value='Animais'>Animais</MenuItem>
                       <MenuItem value='Móveis, Casa e Jardim'>Móveis, Casa e Jardim </MenuItem>
-                      <MenuItem value='Imóveis'>Imóveis</MenuItem>
                       <MenuItem value='Esporte'>Esporte</MenuItem>
                       <MenuItem value='Lazer'>Lazer</MenuItem>
                       <MenuItem value='Outros'>Outros</MenuItem>
