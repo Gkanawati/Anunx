@@ -4,11 +4,9 @@
 
 ## :rocket: Sobre o projeto
 
-Este é um site Ecommerce completo de Anúncios Online, onde qualquer usuário pode criar o seu anúncio e publicá-lo imediatamente.
+Este é um Website de Anúncios Online completo, onde qualquer usuário pode criar o seu anúncio e publicá-lo imediatamente.
 
 A plataforma foi construída utilizando Next.js, um framework React, tanto para o frontend, quanto o backend na construção das APIs e conexão com o Banco de Dados. As informações do site estão armazenados em um banco de dados MongoDB Atlas (em nuvem) e para o armazenamento das imagens em nuvem, é utilizado os serviços da cloudinary.
-
-Ao entrar no site temos a Home do Anunx, em que da forma que está publicado o projeto ele mostra 6 produtos aleatórios cadastrados. Mas no mundo ideal, ou utilizando o plano de hospedagem pago, os anúncios colocar estariam em maior quantidade e ordenados, com os mais recentes publicados primeiro.
 
 Todo o site está responsivo e adaptativo nos diversos tamanhos de tela. Também foi adicionado ao projeto a opção de alteração entre os temas claro e escuro da aplicação, utilizando o Material UI. 📱
 
