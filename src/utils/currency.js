@@ -1,7 +1,3 @@
-const formatCurrency = value => {
-  return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-}
-
 const currencyMask = (e) => {
   let value = e.target.value;
   value = value.replace(/\D/g, "");
@@ -11,4 +7,4 @@ const currencyMask = (e) => {
   return e;
 }
 
-export { formatCurrency, currencyMask }
+export { currencyMask }

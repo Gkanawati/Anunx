@@ -17,6 +17,7 @@ import Carousel from 'react-material-ui-carousel'
 import TemplateDefault from '../../../src/templates/Default';
 import ProductsModel from '../../../src/models/products';
 import dbConnect from '../../../src/utils/dbConnect';
+import Link from 'next/link';
 
 const Product = ({ product }) => {
 
@@ -137,7 +138,25 @@ const Product = ({ product }) => {
                   </Avatar>
                 }
                 title={product.user.name}
-                subheader={product.user.email}
+                subheader={
+                  <>
+                    <Link href={`mailto:${product.user.email}`} passHref>
+                      <a>
+                        <Typography variant='subtitle'>
+                          {product.user.email}
+                        </Typography>
+                      </a>
+                    </Link>
+                    <br />
+                    <Link href={`tel:${product.user.phone}`} passHref>
+                      <a>
+                        <Typography variant='subtitle'>
+                          {product.user.phone}
+                        </Typography>
+                      </a>
+                    </Link>
+                  </>
+                }
               />
               <CardMedia
                 image={product.user.image}
