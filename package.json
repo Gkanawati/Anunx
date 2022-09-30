@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
@@ -33,6 +34,7 @@
     "react-input-mask": "^2.0.4",
     "react-material-ui-carousel": "^3.4.2",
     "slugify": "^1.6.5",
+    "typescript": "^4.8.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
