@@ -55,11 +55,7 @@ const Home = ({ products }) => {
 export async function getServerSideProps() {
   await dbConnect()
 
-  // const products = await ProductsModel.aggregate([
-  //   { $sample: { size: 6 } }
-  // ])
-
-  const products = await ProductsModel.find().limit(9).sort({ publishDate: -1 })
+  const products = await ProductsModel.find().limit(8).sort({ publishDate: -1 })
 
   return {
     props: {
