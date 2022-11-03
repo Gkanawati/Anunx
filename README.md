@@ -1,5 +1,5 @@
 <h1 align="center">
-  🪧🛒 Anunx - Anúncios Online
+  📣🛒 Anunx - Anúncios Online
 </h1>
 
 ## :rocket: Sobre o projeto
